@@ -1,0 +1,143 @@
+.eventCard-container {
+    width:320px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-bottom: 10px;
+
+    overflow: hidden;
+}
+
+.eventCard-top {
+    background-color: #676767;
+    width: 100%;
+    height: 16px;
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+}
+
+.eventCard-content {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10px;
+}
+
+/* Meeting title and edit icon */
+.eventCard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.eventCard-header h3 {
+    margin: 0;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: normal;
+    color: #454545;
+}
+
+.edit-icon {
+    margin-top: 15px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    color: #676B5F;
+}
+
+/* Event details */
+
+.event-date {
+    margin-top: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    color: black;
+    display: block;  
+}
+
+.event-time {
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #1877F2;  
+    display: block;
+}
+
+.event-duration {
+    margin-top: 5px;
+    font-size: 9px;
+    font-weight: 400;
+    color: #7E7E7E; 
+    display: block;
+    margin-bottom: 20px;
+}
+
+
+/* Action section */
+.eventCard-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 20px;
+}
+
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #1877F2;
+}
+
+input:checked + .slider::before {
+    transform: translateX(20px);
+}
+
+/* Action Icons */
+.action-icon {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}

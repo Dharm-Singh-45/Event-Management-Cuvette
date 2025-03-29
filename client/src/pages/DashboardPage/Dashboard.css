@@ -1,0 +1,102 @@
+.dashboard-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+.dashboard-container .dashboard-left{
+    width: 20%;
+    height: 100vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+}
+.dashboard-container .dashboard-left .logo{
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+.dashboard-container .dashboard-left button{
+    margin: 0 auto;
+    width: 130px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 19px;
+    background-color: white;
+    color: #1877F2;
+    border: 1px solid #1877F2;
+    font-size: 16px;
+    font-weight: normal;
+    gap: 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.dashboard-container .dashboard-left .profile{
+    width: 180px;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    margin: auto auto;
+    border: 1px solid black;
+    border-radius: 49px;
+    margin-bottom: 20px;
+}
+.dashboard-container .dashboard-left .profile img{
+width: 40px;
+height: 40px;
+margin-left: 10px;
+}
+.dashboard-container .dashboard-left .profile > span {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -2%;
+}
+
+
+/* Logout Dropdown */
+.dashboard-container .logout-dropdown {
+    position: absolute;
+    bottom: 70px; 
+    left: 7%;
+    background: #F3F3F1;
+    display: flex;
+    align-items: center;
+    padding: 23px 21px;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: 22px;
+    border: 1px solid #ccc;
+    width: 120px;
+    height: 40px;
+    justify-content: center;
+}
+
+.logout-dropdown:hover {
+    background-color: #f0f0f0;
+}
+.dashboard-container  .logout-dropdown > span {
+    font-size: 13px;
+    color: black;
+    white-space: nowrap; 
+ }
+ 
+
+ .dashboard-container .logout-dropdown img {
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px;
+    max-height: 20px;
+    object-fit: cover;
+}
+
+
+.dashboard-container .dashboard-right{
+    width: 80%;
+    height: 100vh;
+    background-color: #F6F7F5;
+}

@@ -1,0 +1,53 @@
+/* Container */
+.booking-container {
+    width: 100%;
+    height: 100vh;
+    margin-left: 30px;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Heading */
+  .booking-container .booking-heading h2 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .booking-container  .booking-heading span {
+    font-size: 14px;
+    color: #6d6d6d;
+  }
+  
+  /* Details Container */
+  .booking-container .booking-details-container {
+    width: 95%;
+    height: 85vh;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 1.5px solid #6d6d6d;
+  }
+  
+  /* Tab Buttons */
+  .booking-container .select-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .booking-container  .select-buttons button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    color: #000000;
+    font-weight: 400;
+  }
+  
+  .booking-container  .select-buttons .active {
+    font-weight: bold;
+    border-bottom:2.5px solid #1877F2;
+    border-radius: 0;
+  }
+  

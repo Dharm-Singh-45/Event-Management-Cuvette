@@ -1,0 +1,35 @@
+.categoryCard-container {
+    width: 240px;
+    height: 45px;
+    background-color: white;
+    border-radius: 9px;
+    padding: 17px 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #E0E2D9;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.categoryCard-container img {
+    width: 18px;
+    height: 18px;
+    margin-left: 5px;
+}
+
+.categoryCard-container span {
+    font-size: 15px;
+    font-weight: 500;
+    color: black; /* Default color */
+}
+
+.categoryCard-container.selected {
+    background-color: #1877F2; 
+    color: white; /* Ensures text color updates */
+    border: 1px solid #1877F2; /* Optional: Change border color */
+}
+
+.categoryCard-container.selected span {
+    color: white; /* Ensure text color updates */
+}

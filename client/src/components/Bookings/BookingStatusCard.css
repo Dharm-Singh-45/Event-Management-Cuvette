@@ -1,0 +1,107 @@
+/* Modal Background */
+.modal-overlay {
+    position: fixed;
+    top: 30%;
+    right: 5%;
+    width: 400px;
+    height: auto;
+
+   
+   
+}
+
+/* Modal Box */
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); */
+}
+
+/* Header Section - Participants Count & Action Buttons */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.card-header h3 {
+    margin: 0;
+    max-width: 70%;
+    color: #343434;
+}
+
+
+/* Participant List */
+.participants-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Remove the border between participants */
+.participant {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: none; /* Removed the border */
+    justify-content: space-between; /* Moves checkbox to the right */
+}
+
+/* Ensure the participant info and checkbox are aligned properly */
+.participant-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1; /* Allows content to take full width */
+}
+
+.participant input {
+    margin-left: auto; /* Pushes the checkbox to the right */
+}
+
+
+.participant-circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #ddd; /* Light gray background */
+    display: inline-block;
+}
+
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.reject-btn, .accept-btn {
+    width: 100px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 35px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+}
+
+.reject-btn {
+    background: #e74c3c;
+    color: white;
+}
+
+.accept-btn {
+    background: #2ecc71;
+    color: white;
+}

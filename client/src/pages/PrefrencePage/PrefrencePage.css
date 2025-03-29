@@ -1,0 +1,83 @@
+.prefrences-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    
+}
+.prefrences-container .left{
+    width: 66.67%;;
+    display: flex;
+    justify-content: center;
+    align-self:center;
+}
+.prefrences-container .left .logo{
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    top: 48px;
+    left: 48px;
+}
+.prefrences-container .left .select-prefrence{
+    margin-top: 20px;
+    width: min(580px, 90%);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.prefrences-container .left .select-prefrence b{
+    color: #000000;
+    font-size: 40px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+
+}
+.prefrences-container .left .select-prefrence input{
+    border-radius: 9px;
+    background-color: #F6F7F5;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 30px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+
+}
+.prefrences-container .left .select-prefrence input::placeholder {
+    color: black;  
+    opacity: 1; 
+}
+.prefrences-container .left .select-prefrence .select-category-div > span{
+    display: block;
+font-size: 20px;
+font-weight: 600;
+margin-bottom: 10px;
+
+}
+.preference-category-card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    gap: 10px;
+    margin-bottom: 10px;
+
+  }
+  .prefrences-container .left .select-prefrence .prefrence-button{
+    background-color: #1877F2;
+    width: 100%;
+    border-radius: 65.3px;
+    height: 48px;
+    font-size: 16.33px;
+    line-height: 24px;
+    letter-spacing: -0.33%;
+    color: white;
+    border: none;
+  }
+/* img container */
+.prefrences-container .right{
+    width: 33.33%;
+}
+.prefrences-container .right img{
+    width: 100%;
+    height: 100vh;
+    object-fit: fit;
+}

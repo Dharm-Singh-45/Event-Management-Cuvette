@@ -1,0 +1,44 @@
+.calendar-container {
+    width: 90%;
+    margin: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .calendar-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .custom-calendar {
+    height: 500px;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rbc-event {
+    border-radius: 5px !important;
+    font-size: 14px !important;
+    text-align: center !important;
+  }
+  
+  .rbc-today {
+    background-color: #f0f8ff !important; /* Light Blue Background for Today */
+  }
+  
+  .rbc-toolbar button {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: none;
+    margin: 3px;
+  }
+  
+  .rbc-toolbar button:hover {
+    background-color: #0056b3;
+  }
+  

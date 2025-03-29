@@ -1,0 +1,101 @@
+.availability-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 450px; /* Adjust width for proper alignment */
+  }
+  
+  .availability-card .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .availability-card .header label {
+    font-weight: bold;
+  
+  }
+ 
+  
+  .availability-card .header select {
+    width: 150px;
+    height: fit-content;
+    border-radius: 5px;
+    color: #1877F2;
+    border: none;
+  }
+
+  .availability-card .day-header input[type="checkbox"] {
+    accent-color: #1877F2; /* Changes checkbox checkmark color */
+    margin-right: 20px;
+    cursor: pointer;
+}
+  
+  .availability-card .week-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .availability-card .day-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .availability-card .day-row span {
+    width: 40px;
+    font-weight: 600;
+  }
+  
+  .availability-card .time-slot {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+  }
+  
+  .availability-card .time-slot input {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .availability-card button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .availability-card button img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .availability-card button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .availability-card .unavailable-text {
+    color: gray;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  
+  .availability-card .day-actions {
+    display: flex;
+    flex-direction: row; 
+    gap: 10px;
+    align-items: center;
+    margin-left: auto;
+    margin-bottom: auto;
+  
+}

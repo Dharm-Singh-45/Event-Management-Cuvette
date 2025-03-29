@@ -1,0 +1,86 @@
+.profile-container {
+    width: 100%;
+    height: 100vh;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.profile-container .profile-heading > h2 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: auto;
+}
+
+.profile-container .profile-heading > span {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: auto;
+}
+
+.profile-container .edit-container {
+    width: 95%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.profile-container .edit-profile {
+    color: #1877F2;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.profile-container hr {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin-bottom: 20px;
+}
+
+.profile-container .profile-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.profile-container .profile-form label {
+    font-size: 17px;
+    margin-bottom: 5px;
+    color: #5E5E5E;
+}
+
+.profile-container .profile-form input {
+    height: 35px;
+    border: 1px solid #3E3E3E;
+    border-radius: 11px;
+    padding: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.profile-container .button-container {
+    text-align: right;
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profile-container button {
+    width: 170px;
+    background-color: #1877F2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 15px;
+    cursor: pointer;
+   
+}
+
+.profile-container button:hover {
+    background-color: #0056b3;
+}

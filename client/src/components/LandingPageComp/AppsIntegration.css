@@ -1,0 +1,33 @@
+.apps-card {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+    gap: 10px;
+    width: 400px;
+    position: relative;
+}
+
+.apps-card-image img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    border-radius:10px ;
+}
+
+.apps-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.apps-card-title {
+    font-size: 18px;
+    font-weight: regular;
+    color: #1E2330;
+}
+
+.apps-card-description {
+    font-size: 16px;
+    color: #1E2330;
+    line-height: 26.4px;
+    letter-spacing: 0.16px;
+}
