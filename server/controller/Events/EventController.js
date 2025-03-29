@@ -1,6 +1,8 @@
 import EventModel from "../../model/EventSchema.js";
 
-// Create a new event
+
+import moment from "moment"; // Install moment.js if not already installed
+
 export const createEvent = async (req, res) => {
   try {
     const {
@@ -10,31 +12,75 @@ export const createEvent = async (req, res) => {
       description,
       date,
       time,
-      duration,
+      durationHours,
+      durationMinutes,
       meetingTitle,
       backgroundColor,
       eventLink,
       emails,
     } = req.body;
 
+    console.log("req.body",req.body)
+
     if (!eventTopic || !hostName || !date || !time || !meetingTitle) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "All required fields must be provided",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "All required fields must be provided",
+      });
     }
 
+    // Convert time and duration into a proper DateTime format
+    const startDateTime = moment(`${date} ${time}`, "YYYY-MM-DD HH:mm");
+    const endDateTime = startDateTime
+      .clone()
+      .add(parseInt(durationHours, 10), "hours")
+      .add(parseInt(durationMinutes, 10), "minutes");
+
+    // Fetch all events for the same user on the same date
+    const existingMeetings = await EventModel.find({
+      createdBy: req.user._id,
+      date: date, // Same date
+    });
+
+    console.log("existingmeeting",existingMeetings)
+    // Check for overlapping meetings
+    const isConflict = existingMeetings.some((event) => {
+      const existingStart = moment(
+        `${moment(event.date).format("YYYY-MM-DD")} ${event.time}`,
+        "YYYY-MM-DD HH:mm"
+      );
+      const existingEnd = existingStart
+        .clone()
+        .add(parseInt(event.durationHours), "hours")
+        .add(parseInt(event.durationMinutes), "minutes");
+    
+      console.log(`\nChecking Conflict with Event: ${event.meetingTitle}`);
+      console.log(`Existing Event: ${existingStart.format("YYYY-MM-DD HH:mm")} to ${existingEnd.format("YYYY-MM-DD HH:mm")}`);
+      console.log(`New Event: ${startDateTime.format("YYYY-MM-DD HH:mm")} to ${endDateTime.format("YYYY-MM-DD HH:mm")}`);
+    
+      const conflict = startDateTime.isBefore(existingEnd) && endDateTime.isAfter(existingStart);
+    
+      console.log(`Conflict Detected: ${conflict}`);
+      return conflict;
+    });
+    
+    
+
+    if (isConflict) {
+      return res.status(400).json({
+        success: false,
+        message: "You already have a meeting scheduled at the selected time.",
+      });
+    }
+
+    // Save the new event
     const event = new EventModel({
       ...req.body,
-      createdBy: req.user._id, // Store logged-in user's ID
+      createdBy: req.user._id,
     });
 
     await event.save();
-    res
-      .status(201)
-      .json({ success: true, message: "Event created successfully", event });
+    res.status(201).json({ success: true, message: "Event created successfully", event });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -60,16 +106,15 @@ export const updateEvent = async (req, res) => {
       description,
       date,
       time,
-      duration,
+      durationHours,
+      durationMinutes,
       meetingTitle,
       backgroundColor,
       eventLink,
       emails,
     } = req.body;
 
-  
-
-    // Check if all required fields are provided
+    // Validate required fields
     if (
       !eventTopic ||
       !hostName ||
@@ -88,17 +133,56 @@ export const updateEvent = async (req, res) => {
       });
     }
 
-    // Ensure event exists before updating
+    // Find the existing event
     const event = await EventModel.findById(req.params.id);
     if (!event) {
       return res.status(404).json({ success: false, message: "Event not found" });
     }
 
-    // Update event with new data
+    // Convert time and duration to DateTime format
+    const startDateTime = moment(`${date} ${time}`, "YYYY-MM-DD HH:mm");
+    const endDateTime = startDateTime
+      .clone()
+      .add(parseInt(durationHours), "hours")
+      .add(parseInt(durationMinutes), "minutes");
+
+    // Find existing meetings (excluding the current event)
+    const existingMeetings = await EventModel.find({
+      createdBy: req.user._id,
+      date: date,
+      _id: { $ne: req.params.id }, // Exclude the event being updated
+    });
+
+    // Conflict checking
+    const isConflict = existingMeetings.some((event) => {
+      const existingStart = moment(
+        `${moment(event.date).format("YYYY-MM-DD")} ${event.time}`,
+        "YYYY-MM-DD HH:mm"
+      );
+      const existingEnd = existingStart
+        .clone()
+        .add(parseInt(event.durationHours), "hours")
+        .add(parseInt(event.durationMinutes), "minutes");
+
+      console.log(`\nChecking Conflict with Event: ${event.meetingTitle}`);
+      console.log(`Existing Event: ${existingStart.format("YYYY-MM-DD HH:mm")} to ${existingEnd.format("YYYY-MM-DD HH:mm")}`);
+      console.log(`Updated Event: ${startDateTime.format("YYYY-MM-DD HH:mm")} to ${endDateTime.format("YYYY-MM-DD HH:mm")}`);
+
+      return startDateTime.isBefore(existingEnd) && endDateTime.isAfter(existingStart);
+    });
+
+    if (isConflict) {
+      return res.status(400).json({
+        success: false,
+        message: "The selected time conflicts with an existing meeting.",
+      });
+    }
+
+    // Update event
     const updatedEvent = await EventModel.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true, runValidators: true } // Ensure validators run on update
+      { new: true, runValidators: true }
     );
 
     res.status(200).json({
@@ -111,6 +195,7 @@ export const updateEvent = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
 
 // Delete an event
 export const deleteEvent = async (req, res) => {
