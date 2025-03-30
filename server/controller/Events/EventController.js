@@ -1,7 +1,7 @@
 import EventModel from "../../model/EventSchema.js";
 
-
 import moment from "moment"; // Install moment.js if not already installed
+import UnavailableModel from "../../model/UnavailableSchema.js";
 
 export const createEvent = async (req, res) => {
   try {
@@ -20,7 +20,7 @@ export const createEvent = async (req, res) => {
       emails,
     } = req.body;
 
-    console.log("req.body",req.body)
+    console.log("req.body", req.body);
 
     if (!eventTopic || !hostName || !date || !time || !meetingTitle) {
       return res.status(400).json({
@@ -36,13 +36,52 @@ export const createEvent = async (req, res) => {
       .add(parseInt(durationHours, 10), "hours")
       .add(parseInt(durationMinutes, 10), "minutes");
 
+    // 1️⃣ Fetch unavailable slots for the user on the given date
+    const unavailableSlots = await UnavailableModel.findOne({
+      userId: req.user._id,
+      date: date,
+    });
+
+    if (unavailableSlots) {
+      const isUnavailable = unavailableSlots.slots.some((slot) => {
+        if (slot.start === "00:00" && slot.end === "23:59") {
+          return true; // Entire day blocked
+        }
+        if (!slot.start || !slot.end) {
+          return false;
+        }
+
+        const unavailableStart = moment(
+          `${date} ${slot.start}`,
+          "YYYY-MM-DD HH:mm"
+        );
+        const unavailableEnd = moment(
+          `${date} ${slot.end}`,
+          "YYYY-MM-DD HH:mm"
+        );
+
+        return (
+          startDateTime.isBefore(unavailableEnd) &&
+          endDateTime.isAfter(unavailableStart)
+        );
+      });
+
+      if (isUnavailable) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "You have an unavailable time slot for the selected date and time.",
+        });
+      }
+    }
+
     // Fetch all events for the same user on the same date
     const existingMeetings = await EventModel.find({
       createdBy: req.user._id,
       date: date, // Same date
     });
 
-    console.log("existingmeeting",existingMeetings)
+    console.log("existingmeeting", existingMeetings);
     // Check for overlapping meetings
     const isConflict = existingMeetings.some((event) => {
       const existingStart = moment(
@@ -53,18 +92,26 @@ export const createEvent = async (req, res) => {
         .clone()
         .add(parseInt(event.durationHours), "hours")
         .add(parseInt(event.durationMinutes), "minutes");
-    
+
       console.log(`\nChecking Conflict with Event: ${event.meetingTitle}`);
-      console.log(`Existing Event: ${existingStart.format("YYYY-MM-DD HH:mm")} to ${existingEnd.format("YYYY-MM-DD HH:mm")}`);
-      console.log(`New Event: ${startDateTime.format("YYYY-MM-DD HH:mm")} to ${endDateTime.format("YYYY-MM-DD HH:mm")}`);
-    
-      const conflict = startDateTime.isBefore(existingEnd) && endDateTime.isAfter(existingStart);
-    
+      console.log(
+        `Existing Event: ${existingStart.format(
+          "YYYY-MM-DD HH:mm"
+        )} to ${existingEnd.format("YYYY-MM-DD HH:mm")}`
+      );
+      console.log(
+        `New Event: ${startDateTime.format(
+          "YYYY-MM-DD HH:mm"
+        )} to ${endDateTime.format("YYYY-MM-DD HH:mm")}`
+      );
+
+      const conflict =
+        startDateTime.isBefore(existingEnd) &&
+        endDateTime.isAfter(existingStart);
+
       console.log(`Conflict Detected: ${conflict}`);
       return conflict;
     });
-    
-    
 
     if (isConflict) {
       return res.status(400).json({
@@ -80,7 +127,9 @@ export const createEvent = async (req, res) => {
     });
 
     await event.save();
-    res.status(201).json({ success: true, message: "Event created successfully", event });
+    res
+      .status(201)
+      .json({ success: true, message: "Event created successfully", event });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -136,7 +185,9 @@ export const updateEvent = async (req, res) => {
     // Find the existing event
     const event = await EventModel.findById(req.params.id);
     if (!event) {
-      return res.status(404).json({ success: false, message: "Event not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Event not found" });
     }
 
     // Convert time and duration to DateTime format
@@ -165,10 +216,21 @@ export const updateEvent = async (req, res) => {
         .add(parseInt(event.durationMinutes), "minutes");
 
       console.log(`\nChecking Conflict with Event: ${event.meetingTitle}`);
-      console.log(`Existing Event: ${existingStart.format("YYYY-MM-DD HH:mm")} to ${existingEnd.format("YYYY-MM-DD HH:mm")}`);
-      console.log(`Updated Event: ${startDateTime.format("YYYY-MM-DD HH:mm")} to ${endDateTime.format("YYYY-MM-DD HH:mm")}`);
+      console.log(
+        `Existing Event: ${existingStart.format(
+          "YYYY-MM-DD HH:mm"
+        )} to ${existingEnd.format("YYYY-MM-DD HH:mm")}`
+      );
+      console.log(
+        `Updated Event: ${startDateTime.format(
+          "YYYY-MM-DD HH:mm"
+        )} to ${endDateTime.format("YYYY-MM-DD HH:mm")}`
+      );
 
-      return startDateTime.isBefore(existingEnd) && endDateTime.isAfter(existingStart);
+      return (
+        startDateTime.isBefore(existingEnd) &&
+        endDateTime.isAfter(existingStart)
+      );
     });
 
     if (isConflict) {
@@ -195,7 +257,6 @@ export const updateEvent = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
-
 
 // Delete an event
 export const deleteEvent = async (req, res) => {
@@ -230,9 +291,9 @@ export const toggleEvent = async (req, res) => {
   }
 };
 
-// get event by id 
+// get event by id
 
-export const getEventByID = async(req,res) =>{
+export const getEventByID = async (req, res) => {
   try {
     const event = await EventModel.findById(req.params.id);
     if (!event) {
@@ -243,4 +304,4 @@ export const getEventByID = async(req,res) =>{
     console.error(error);
     res.status(500).json({ message: "Server error" });
   }
-}
+};
