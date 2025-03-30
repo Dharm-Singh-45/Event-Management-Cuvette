@@ -71,18 +71,21 @@ const AvailablityCard = () => {
   const handleCheck = (index) => {
     const updatedAvailability = [...availability];
     const isChecked = !updatedAvailability[index].checked;
-
+  
     updatedAvailability[index].checked = isChecked;
-
+  
     if (!isChecked) {
+      // Mark as unavailable (full day)
       updatedAvailability[index].slots = [{ start: "00:00", end: "23:59" }];
     } else {
+      // Mark as available (reset to empty slots)
       updatedAvailability[index].slots = [{ start: "", end: "" }];
     }
-
+  
     setAvailability(updatedAvailability);
     triggerSave(updatedAvailability);
   };
+  
 
   const handleStartTimeChange = (index, slotIndex, value) => {
     const updatedAvailability = [...availability];
@@ -156,6 +159,12 @@ const AvailablityCard = () => {
 
   const addSlot = (index) => {
     const updatedAvailability = [...availability];
+    const lastSlot = updatedAvailability[index].slots[updatedAvailability[index].slots.length - 1];
+
+    if (!lastSlot.start || !lastSlot.end) {
+      alert("Please complete the current time slot before adding new one");
+      return;
+    }
     updatedAvailability[index].slots.push({ start: "", end: "" });
     setAvailability(updatedAvailability);
   };
@@ -177,10 +186,12 @@ const AvailablityCard = () => {
   const removeSlot = async (index, slotIndex) => {
     const updatedAvailability = [...availability];
     const selectedDay = updatedAvailability[index];
-
-    if (selectedDay.slots.length > 1) {
+  
+    // Always allow removing if there are slots (even if it's the last one)
+    if (selectedDay.slots.length > 0) {
       const slotToDelete = selectedDay.slots[slotIndex];
-
+  
+      // Only try to delete from backend if the slot has an _id
       if (slotToDelete._id) {
         try {
           await deleteUnavailableSlot({
@@ -193,8 +204,15 @@ const AvailablityCard = () => {
           return;
         }
       }
-
+  
+      // Remove the slot from the UI
       selectedDay.slots.splice(slotIndex, 1);
+      
+      // If we removed the last slot, add an empty one
+      if (selectedDay.slots.length === 0) {
+        selectedDay.slots.push({ start: "", end: "" });
+      }
+      
       setAvailability(updatedAvailability);
       triggerSave(updatedAvailability);
     }
@@ -205,22 +223,22 @@ const AvailablityCard = () => {
       console.error("User ID is missing");
       return;
     }
-
+  
     const currentData = availabilityData.map((day) => ({
       userId,
       day: day.day,
       slots: day.checked
-        ? day.slots
-            .filter(slot => slot.start && slot.end)
-            .map(slot => ({
+        ? day.slots.filter(slot => slot.start && slot.end).length > 0
+          ? day.slots.map(slot => ({
               startTime: slot.start,
               endTime: slot.end,
             }))
-        : [{ startTime: "00:00", endTime: "23:59" }],
+          : [{ startTime: "", endTime: "" }] // Store blank times when no slots are provided
+        : [{ startTime: "00:00", endTime: "23:59" }], // Store full-day unavailability when unchecked
     }));
-
+  
     const currentHash = getDataHash(currentData);
-
+  
     if (currentHash !== lastSavedHash) {
       try {
         await saveUnavailableSlots({ unavailableSlots: currentData }).unwrap();
@@ -231,6 +249,7 @@ const AvailablityCard = () => {
       }
     }
   };
+  
 
   useEffect(() => {
     if (!unavailableSlots?.unavailableSlots) return;

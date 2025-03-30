@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 
 const unavailableSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  day: { type: String, required: true }, // e.g., "Mon"
+  day: { type: String, required: true },
+  date: { type: String, required: true },
+ 
   slots: [
     {
       start: { type: String, required: true },
