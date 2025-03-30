@@ -197,6 +197,40 @@ export const updateEvent = async (req, res) => {
       .add(parseInt(durationHours), "hours")
       .add(parseInt(durationMinutes), "minutes");
 
+      // 1️⃣ Fetch unavailable slots for the user on the given date
+    const unavailableSlots = await UnavailableModel.findOne({
+      userId: req.user._id,
+      date: date,
+    });
+
+    if (unavailableSlots) {
+      const isUnavailable = unavailableSlots.slots.some((slot) => {
+        // ⛔ If start time is "00:00" and end time is "23:59", the whole day is unavailable
+        if (slot.start === "00:00" && slot.end === "23:59") {
+          return true; // Entire day blocked
+        }
+
+        // ✅ If start and end are empty (""), the day is fully available → No need to check
+        if (!slot.start || !slot.end) {
+          return false;
+        }
+
+        // Check for specific unavailable slots
+        const unavailableStart = moment(`${date} ${slot.start}`, "YYYY-MM-DD HH:mm");
+        const unavailableEnd = moment(`${date} ${slot.end}`, "YYYY-MM-DD HH:mm");
+
+        return startDateTime.isBefore(unavailableEnd) && endDateTime.isAfter(unavailableStart);
+      });
+
+      if (isUnavailable) {
+        return res.status(400).json({
+          success: false,
+          message: "You have an unavailable time slot that conflicts with this meeting.",
+        });
+      }
+    }
+
+
     // Find existing meetings (excluding the current event)
     const existingMeetings = await EventModel.find({
       createdBy: req.user._id,

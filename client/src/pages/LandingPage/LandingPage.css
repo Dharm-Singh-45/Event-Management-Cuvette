@@ -23,7 +23,7 @@
     align-items: center;
     font-size: 24px;
     font-weight: 800;
-    margin: 0;
+   margin-top: 40px;
     gap: 10px; 
 }
 .top-bar .logo img {

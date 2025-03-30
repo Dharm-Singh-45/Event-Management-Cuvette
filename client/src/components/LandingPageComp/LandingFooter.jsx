@@ -6,14 +6,17 @@ import Music from "../../assets/music.png";
 import Youtube from "../../assets/utube.png";
 import Vector from "../../assets/vector.png";
 
+import { useNavigate } from "react-router-dom";
+
 const LandingFooter = () => {
+  const navigate = useNavigate();
   return (
     <div className="footer-container">
       {/* Top Section: Login & Signup (Left) + Links (Right) */}
       <div className="footer-top">
         <div className="auth-buttons">
-          <button className="login-button">Log in</button>
-          <button className="signup-button">Sign up free</button>
+          <button className="login-button" onClick={()=>navigate('/login')}>Log in</button>
+          <button className="signup-button" onClick={()=>navigate('/signup')}>Sign up free</button>
         </div>
         <div className="links-container">
           <div>

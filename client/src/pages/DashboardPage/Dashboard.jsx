@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import "./Dashboard.css";
 import Logo from "../../assets/logo.png";
@@ -12,6 +12,8 @@ import Avatar from "../../assets/Avatar.png";
 import SignOut from "../../assets/logout.png";
 
 import { useGetUserDetailsQuery } from "../../redux/userApi";
+import { useGetEventsQuery, useGetUnavailableSlotsQuery } from "../../redux/eventApi";
+import { useGetBookingsQuery } from "../../redux/bookingApi";
 
 const asideItems = [
   { img: Events, title: "Events", path: "/dashboard/events" },
@@ -24,13 +26,15 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showLogout, setShowLogout] = useState(false);
+  const [activeTab, setActiveTab] = useState(location.pathname);
 
 
   const { data: userData, isLoading } = useGetUserDetailsQuery();
 
-  const fullName = userData?.firstName && userData?.lastName 
-  ? `${userData.firstName} ${userData.lastName}` 
-  : userData?.firstName || userData?.lastName || "User";
+  const userId = userData?._id; 
+  const { refetch: refetchEvents } = useGetEventsQuery(undefined, { skip: !userId }); 
+  const { refetch: refetchBookings } = useGetBookingsQuery(undefined, { skip: !userId }); 
+  const { refetch: refetchAvailability } = useGetUnavailableSlotsQuery(userId, { skip: !userId });
 
   const username = userData?.username
 
@@ -41,6 +45,17 @@ const Dashboard = () => {
     navigate("/login"); 
   };
 
+  useEffect(() => {
+    if (!userId) return;
+    if (activeTab === "/dashboard/events") {
+      refetchEvents();
+    } else if (activeTab === "/dashboard/booking") {
+      refetchBookings();
+    } else if (activeTab === "/dashboard/availability") {
+      refetchAvailability();
+    }
+  }, [activeTab, refetchEvents, refetchBookings, refetchAvailability]);
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-left">
@@ -50,7 +65,7 @@ const Dashboard = () => {
         </div>
 
         {asideItems.map((item, index) => (
-          <div key={index} onClick={() => navigate(item.path)}>
+          <div key={index} onClick={() =>{setActiveTab(item.path); navigate(item.path)}}>
             <Aside aside={item} isActive={location.pathname === item.path} />
           </div>
         ))}

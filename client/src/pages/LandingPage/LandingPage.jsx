@@ -18,6 +18,8 @@ import Community from "../../assets/Community.png";
 import Gift from "../../assets/Gift.png";
 import LandingFooter from "../../components/LandingPageComp/LandingFooter";
 
+import { useNavigate } from "react-router-dom";
+
 const integrationsData = [
   {
     imgSrc: Audiowave,
@@ -67,6 +69,7 @@ const integrationsData = [
 ];
 
 const LandingPage = () => {
+    const navigate = useNavigate();
   return (
     <>
       <div className="container">
@@ -75,13 +78,13 @@ const LandingPage = () => {
             <img src={Logo} alt="logo" />
             <span>CNNCT</span>
           </div>
-          <div className="signup-btn">Sign up free</div>
+          <div className="signup-btn" onClick={()=>navigate('/signup')}>Sign up free</div>
         </div>
         <div className="header-section">
           CNNCT-Easy <br />
           Scheduling Ahead
         </div>
-        <button>Sign up free</button>
+        <button onClick={()=>navigate('/signup')}>Sign up free</button>
         <div className="screen1">
           <img src={Screen1} alt="screen1" />
         </div>
