@@ -21,15 +21,35 @@
 .categoryCard-container span {
     font-size: 15px;
     font-weight: 500;
-    color: black; /* Default color */
+    color: black;
 }
 
 .categoryCard-container.selected {
     background-color: #1877F2; 
-    color: white; /* Ensures text color updates */
-    border: 1px solid #1877F2; /* Optional: Change border color */
+    color: white; 
+    border: 1px solid #1877F2; 
 }
 
 .categoryCard-container.selected span {
-    color: white; /* Ensure text color updates */
+    color: white; 
 }
+
+
+@media screen and (max-width: 500px) {
+    .categoryCard-container {
+      width: 100%; 
+      height: auto; 
+      padding: 12px 8px; 
+      gap: 8px;
+    }
+  
+    .categoryCard-container img {
+      width: 16px; 
+      height: 16px;
+    }
+  
+    .categoryCard-container span {
+      font-size: 14px;
+    }
+  }
+  
