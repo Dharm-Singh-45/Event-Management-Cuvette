@@ -81,6 +81,9 @@
     flex-direction: column;
     width: 100%;
 }
+.login-container .input-div label{
+   display: none;
+}
 
 .login-container .input-div input {
     width: 100%;
@@ -136,7 +139,7 @@
     font-weight: regular;
     text-align: center;
     color: #676B5F;
-    margin-top: 200px;
+    margin-top: 150px;
 }
 
 .login-container .img-container {
@@ -152,4 +155,86 @@
     object-fit: cover;
 }
 
+@media screen and (max-width:500px) {
+    .login-container .img-container{
+        display: none;
+    }
+}
 
+@media screen and (max-width: 500px) {
+    /* Make the login container take full width */
+    .login-container {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Hide the right-side image */
+    .login-container .img-container {
+        display: none;
+    }
+
+    /* Left container should take full width */
+    .login-container .login-container-left {
+        width: 100%;
+        padding: 20px;
+    }
+
+    /* Keep logo at the same top-left position */
+    .login-container .login-container-left .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+
+    /* Outer div (form container) should take full width */
+    .login-container .outer-div {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin-top: 100px;
+    }
+
+    /* Login form should take full width */
+    .login-container .login-form {
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+    }
+
+    /* Adjust input fields */
+    .login-container .input-div input {
+        width: 100%;
+        background-color: white;
+        border: 1px solid #666666;
+        border-radius: 8px;
+    }
+    .login-container .input-div input::placeholder {
+        color: transparent;
+    }
+
+    /* Adjust button */
+    .input-container .button-div button {
+        width: 100%;
+        background-color: #1877F2;
+        color: #FFFFFF;
+        border-radius: 47px;
+        font-size: 20px;
+    }
+    .login-container .signup-link {
+        margin-top: 10px;
+    }
+    .login-container .tandc {
+        margin-top: 15%;
+    }
+    .login-container .input-div label{
+        display: block;
+        color:#666666;
+        font-size: 22x;
+        margin-bottom: 10px;
+     }
+}
+
+
+ 
