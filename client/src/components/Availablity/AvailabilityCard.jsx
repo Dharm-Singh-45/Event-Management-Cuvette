@@ -9,6 +9,7 @@ import "./AvailablityCard.css";
 import AddTime from "../../assets/add-time.png";
 import Copy from "../../assets/copy.png";
 import DeleteTime from "../../assets/exit-time.png";
+import { toast } from "react-toastify";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -118,12 +119,12 @@ const AvailablityCard = () => {
     const daySlots = updatedAvailability[index].slots;
 
     if (!slot.start) {
-      alert("Please set start time first!");
+      toast.error("Please set start time first!");
       return;
     }
 
     if (value && value <= slot.start) {
-      alert("End time must be after start time!");
+      toast.error("End time must be after start time!");
       return;
     }
 
@@ -143,7 +144,7 @@ const AvailablityCard = () => {
       const conflict = checkTimeConflict(daySlots, slotIndex, slot.start, slot.end);
       
       if (conflict) {
-        alert("This time slot conflicts with an existing one. The slot has been reset.");
+        toast.error("This time slot conflicts with an existing one. The slot has been reset.");
         // Reset the conflicted slot
         updatedAvailability[index].slots[slotIndex] = { start: "", end: "" };
         setAvailability(updatedAvailability);
@@ -162,7 +163,7 @@ const AvailablityCard = () => {
     const lastSlot = updatedAvailability[index].slots[updatedAvailability[index].slots.length - 1];
 
     if (!lastSlot.start || !lastSlot.end) {
-      alert("Please complete the current time slot before adding new one");
+      toast.error("Please complete the current time slot before adding new one");
       return;
     }
     updatedAvailability[index].slots.push({ start: "", end: "" });
@@ -174,7 +175,7 @@ const AvailablityCard = () => {
     const lastSlot = updatedAvailability[index].slots[updatedAvailability[index].slots.length - 1];
     
     if (!lastSlot.start || !lastSlot.end) {
-      alert("Please complete the current time slot before copying");
+      toast.error("Please complete the current time slot before copying");
       return;
     }
     
@@ -199,8 +200,10 @@ const AvailablityCard = () => {
             day: selectedDay.day,
             slotId: slotToDelete._id,
           }).unwrap();
+          toast.success("slot deleted successfully.")
         } catch (error) {
           console.error("Error deleting slot:", error);
+          toast.error("Error deleting slot")
           return;
         }
       }
@@ -244,6 +247,7 @@ const AvailablityCard = () => {
         await saveUnavailableSlots({ unavailableSlots: currentData }).unwrap();
         setLastSavedHash(currentHash);
         refetch();
+        toast.success("unavailable slot time added")
       } catch (error) {
         console.error("Save failed:", error);
       }

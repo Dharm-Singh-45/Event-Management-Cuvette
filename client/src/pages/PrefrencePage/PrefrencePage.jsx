@@ -13,6 +13,7 @@ import Tech from "../../assets/Tech.png";
 import Marketing from "../../assets/Marketing.png";
 import { useNavigate } from "react-router-dom";
 import { useGetUserDetailsQuery, useUpdatePreferencesMutation } from "../../redux/userApi";
+import { toast } from "react-toastify";
 
 
 const categories = [
@@ -32,19 +33,20 @@ const PrefrencePage = () => {
   const navigate = useNavigate();
   const { data: userDetails, isLoading } = useGetUserDetailsQuery();
 
-  console.log(userDetails)
   const [updatePreferences, { isLoading: isUpdating }] = useUpdatePreferencesMutation();
 
   const handleContinue = async () => {
     if (!username.trim() || !selectedCategory) {
-      alert("Please provide a username and select a category.");
+      toast.error("Please provide a username and select a category.")
+  
       return;
     }
 
     
     // Ensure user details are available
     if (!userDetails?._id) {
-      alert("User details not found. Please log in again.");
+   
+      toast.error("User details not found. Please log in again.")
       return;
     }
     try {
@@ -53,11 +55,10 @@ const PrefrencePage = () => {
         username,
         selectedCategory,
       }).unwrap();
-
       navigate("/dashboard/events"); 
     } catch (error) {
       console.error("Error updating preferences:", error);
-      alert("Failed to update preferences. Please try again.");
+      toast.error("Failed to update preferences. Please try again.")
     }
   };
 

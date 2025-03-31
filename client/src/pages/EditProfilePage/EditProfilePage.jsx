@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./EditProfilePage.css";
 import { useUpdateProfileMutation, useGetUserDetailsQuery } from "../../redux/userApi";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EditProfilePage = () => {
   const { data: user, isLoading } = useGetUserDetailsQuery();
@@ -36,16 +37,17 @@ const EditProfilePage = () => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
     try {
       const response = await updateProfile(formData).unwrap();
-      alert(response.message);
+      toast.success(response.message);
       navigate("/login");
     } catch (error) {
       console.error("Profile update failed", error);
+      toast.error("Profile update failed")
     }
   };
 

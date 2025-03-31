@@ -7,6 +7,7 @@ import { calculateEndTime } from "../../helper/calculateDateAndTime";
 import { useDeleteEventMutation, useToggleEventStatusMutation } from "../../redux/eventApi";
 import { formatStartTime } from "../../helper/formatSartTime";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EventCard = ({ event, refreshEvents }) => {
   const [isToggled, setIsToggled] = useState(false);
@@ -30,11 +31,12 @@ const EventCard = ({ event, refreshEvents }) => {
         setIsToggled(response.data.enabled); // Update UI based on response
         refreshEvents(); // Refresh event list
       } else {
-        alert("Failed to update event status.");
+        toast.error("Failed to update event status.")
+        
       }
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Something went wrong.");
+      toast.error("Something went wrong.")
     }
   };
   const handleDelete = async () => {
@@ -42,14 +44,16 @@ const EventCard = ({ event, refreshEvents }) => {
       try {
         const response = await deleteEvent(event._id);
         if (response?.data?.success) {
-          alert("Event deleted successfully!");
+          toast.success("Event deleted successfully!")
+        
           refreshEvents();
         } else {
-          alert("Failed to delete event.");
+          toast.error("Failed to delete event.")
+
         }
       } catch (error) {
         console.error("Error deleting event:", error);
-        alert("Something went wrong.");
+        toast.error("Something went wrong.")
       }
     }
   };
@@ -61,7 +65,7 @@ const EventCard = ({ event, refreshEvents }) => {
         .then(() => alert("Event link copied to clipboard!"))
         .catch((err) => console.error("Failed to copy: ", err));
     } else {
-      alert("No event link available to copy.");
+      toast.error("No event link available to copy.")
     }
   };
 
@@ -81,7 +85,7 @@ const EventCard = ({ event, refreshEvents }) => {
       <div className="eventCard-content">
         <div className="eventCard-info">
           <div className="eventCard-header">
-            <h3>{event.meetingTitle}</h3>
+            <h3>{event.eventTopic}</h3>
             <img src={EditIcon} alt="Edit" className="edit-icon" onClick={handleEdit} />
           </div>
           <span className="event-date">{eventDate.toDateString()}</span>

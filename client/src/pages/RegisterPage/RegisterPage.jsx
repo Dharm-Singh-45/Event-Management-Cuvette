@@ -4,6 +4,7 @@ import { useSignUpUserMutation } from "../../redux/authApi";
 import "./RegisterPage.css";
 import Logo from "../../assets/logo.png";
 import SideImage from "../../assets/registerPageSideImage.png";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const RegisterPage = () => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!");
       return;
     }
 
@@ -39,12 +40,11 @@ const RegisterPage = () => {
         email: formData.email,
         password: formData.password,
       }).unwrap();
-
-      console.log("Signup Successful:", response);
-      alert("Account created successfully!");
-      navigate("/login");
+      toast.success("Account created successfully!");
+      navigate('/login')
     } catch (err) {
       console.error("Signup Error:", err);
+      toast.error(err?.data?.message || "Signup failed!"); 
     }
   };
 
@@ -89,7 +89,6 @@ const RegisterPage = () => {
                 </button>
               </div>
             </div>
-            {error && <p className="error">{error.data?.message || "Signup failed"}</p>}
           </form>
           <div className="tandc">
             This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.

@@ -4,6 +4,7 @@ import "./AddEventDetails.css";
 import Avatar from "../../assets/Avatar.png";
 import EditIcon from "../../assets/editicon.png";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddEventDetails = ({ eventData, onBack }) => {
   const [selectedColor, setSelectedColor] = useState("#342B26");
@@ -68,7 +69,7 @@ const AddEventDetails = ({ eventData, onBack }) => {
 
   const handleSubmit = async () => {
     if (!eventDetails.eventLink || eventDetails.emails.length === 0) {
-      alert("Please fill in all required fields!");
+      toast.error("Please fill in all required fields!");
       return;
     }
 
@@ -82,12 +83,12 @@ const AddEventDetails = ({ eventData, onBack }) => {
 
     try {
       await createEvent(finalEventData).unwrap();
-      alert("Event created successfully!");
+      toast.success("Event created successfully!");
       refetch();
       navigate("/dashboard/events");
     } catch (error) {
       console.error("Error creating event:", error);
-      alert("Failed to create event!");
+      toast.error("Failed to create event!");
     }
   };
 

@@ -4,6 +4,7 @@ import "../CreateNewEventPage/AddEventDetails.css";
 import Avatar from "../../assets/Avatar.png";
 import EditIcon from "../../assets/editicon.png";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UpdateEventDetails = ({ originalEvent, eventData, onBack,eventId }) => {
 
@@ -75,14 +76,14 @@ const UpdateEventDetails = ({ originalEvent, eventData, onBack,eventId }) => {
     if (emails) {
       setEventDetails((prevDetails) => ({
         ...prevDetails,
-        emails: [...new Set([...prevDetails.emails, ...emails.filter(validateEmail)])], // Prevent duplicates
+        emails: [...new Set([...prevDetails.emails, ...emails.filter(validateEmail)])], 
       }));
     }
   };
 
   const handleSubmit = async () => {
     if (!eventDetails.eventLink || eventDetails.emails.length === 0) {
-      alert("Please fill in all required fields!");
+      toast.error("Please fill in all required fields!");
       return;
     }
 
@@ -98,16 +99,14 @@ const UpdateEventDetails = ({ originalEvent, eventData, onBack,eventId }) => {
       };
       
 
-    console.log("updateEventData",updatedEventData)
-
     try {
       await updateEvent({ eventId, updatedData: updatedEventData }).unwrap();
-      alert("Event updated successfully!");
+      toast.success("Event updated successfully!");
       refetch();
       navigate("/dashboard/events");
     } catch (error) {
       console.error("Error updating event:", error);
-      alert("Failed to update event!");
+      toast.error("Failed to update event!");
     }
   };
 

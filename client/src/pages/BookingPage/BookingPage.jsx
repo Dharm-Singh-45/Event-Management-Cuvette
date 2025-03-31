@@ -5,14 +5,21 @@ import {
 } from "../../redux/bookingApi";
 import BookingCard from "../../components/Bookings/BookingCard";
 import "./BookingPage.css";
+import { toast } from "react-toastify";
+import { useGetUserDetailsQuery } from "../../redux/userApi";
 
 const BookingPage = () => {
   const [activeTab, setActiveTab] = useState("Upcoming");
   const [openModal, setOpenModal] = useState(null);
 
   const { data, error, isLoading, refetch } = useGetBookingsQuery();
-  const [updateBookingStatus] = useUpdateBookingStatusMutation(); // API mutation for updating status
-  const userEmail = "booking@mail.com"; // Replace with actual logged-in user email from Redux or context
+
+  const { data: userData } = useGetUserDetailsQuery();
+  
+
+  const [updateBookingStatus] = useUpdateBookingStatusMutation();
+  const userEmail = userData?.email; 
+ 
 
   if (isLoading) return <p>Loading bookings...</p>;
   if (error) return <p>Error fetching bookings.</p>;
@@ -31,10 +38,11 @@ const BookingPage = () => {
   const handleUpdateStatus = async (bookingId, newStatus) => {
     try {
       await updateBookingStatus({ bookingId, status: newStatus }).unwrap();
-      alert("Status updated successfully!");
+      toast.success("Status updated successfully!")
+    
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Failed to update status.");
+      toast.error("Failed to update status.");
     }
   };
  

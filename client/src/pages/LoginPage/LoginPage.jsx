@@ -4,6 +4,7 @@ import Logo from '../../assets/logo.png';
 import SideImage from "../../assets/registerPageSideImage.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../redux/authApi";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -18,14 +19,15 @@ const LoginPage = () => {
      const response =  await loginUser({ email, password }).unwrap();
       navigate('/preferences')
       localStorage.setItem("token", response.token);
-      alert('Login successful');
+        toast.success('Login successful');
+  
       if (response.user.username) {
         navigate("/dashboard/events");
       } else {
         navigate("/preferences");
       }
     } catch (err) {
-      alert(err.data?.message || 'Login failed');
+      toast.error(err.data?.message || 'Login failed');
     }
   };
 
