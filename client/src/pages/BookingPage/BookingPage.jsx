@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import {
   useGetBookingsQuery,
   useUpdateBookingStatusMutation,
@@ -8,6 +8,7 @@ import "./BookingPage.css";
 
 const BookingPage = () => {
   const [activeTab, setActiveTab] = useState("Upcoming");
+  const [openModal, setOpenModal] = useState(null);
 
   const { data, error, isLoading, refetch } = useGetBookingsQuery();
   const [updateBookingStatus] = useUpdateBookingStatusMutation(); // API mutation for updating status
@@ -36,7 +37,7 @@ const BookingPage = () => {
       alert("Failed to update status.");
     }
   };
-
+ 
   return (
     <div className="booking-container">
       <div className="booking-heading">
@@ -89,6 +90,8 @@ const BookingPage = () => {
                 onUpdateStatus={handleUpdateStatus}
                 activeTab={activeTab}
                 refetch={refetch}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
               />
             ))
         ) : (

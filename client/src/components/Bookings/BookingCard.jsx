@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { FaUsers } from "react-icons/fa";
 import { useUpdateBookingStatusMutation } from "../../redux/bookingApi";
 import "./BookingCard.css";
@@ -19,20 +19,18 @@ const BookingCard = ({
   durationMinutes,
   activeTab,
   refetch,
+  openModal,
+  setOpenModal, // Receive global state
 }) => {
   const [updateStatus] = useUpdateBookingStatusMutation();
-  const [newStatus, setNewStatus] = useState(status);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const statusButtonRef = useRef(null);
+  const peopleButtonRef = useRef(null);
 
   const endTime = calculateEndTime(time, durationHours, durationMinutes);
 
   const handleStatusChange = async (updatedStatus) => {
-    setNewStatus(updatedStatus);
-    setIsDropdownOpen(false);
     await updateStatus({ eventId: _id, status: updatedStatus });
+    setOpenModal(null);
     refetch();
   };
 
@@ -42,7 +40,15 @@ const BookingCard = ({
     cancelled: "Rejected",
   };
 
-  const displayStatus = statusMapping[newStatus] || newStatus;
+  const displayStatus = statusMapping[status] || status;
+
+  const getModalPosition = (buttonRef) => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      return { top: rect.bottom + 5, left: rect.left };
+    }
+    return { top: "30%", left: "auto" };
+  };
 
   return (
     <div className="booking-card">
@@ -51,62 +57,62 @@ const BookingCard = ({
           {date ? new Date(date).toDateString() : "N/A"}
         </span>
         <span className="booking-time">
-          {time
-            ? `${formatStartTime(time)} - ${endTime}`
-            : "Time not available"}
+          {time ? `${formatStartTime(time)} - ${endTime}` : "Time not available"}
         </span>
       </div>
 
       <div className="booking-details">
-        <span className="booking-title">
-          {meetingTitle || "No title available"}
-        </span>
-        <span className="booking-description">
-          {description || "No description provided"}
-        </span>
+        <span className="booking-title">{meetingTitle || "No title available"}</span>
+        <span className="booking-description">{description || "No description provided"}</span>
       </div>
 
       {/* Status Button - Opens Modal Only When Active Tab is "Pending" */}
       <div className="status-section">
         <button
+          ref={statusButtonRef}
           onClick={() => {
             if (activeTab === "Pending") {
-              setIsModalOpen((prev) => !prev);
+              setOpenModal(openModal === `status-${_id}` ? null : `status-${_id}`);
             }
           }}
-          className={`status-badge ${newStatus}`}
+          className={`status-badge ${status}`}
         >
           {displayStatus}
         </button>
       </div>
+
       {activeTab !== "cancelled" && (
         <div
+          ref={peopleButtonRef}
           className="people-count"
-          onClick={() => setIsEmailModalOpen((prev) => !prev)}
+          onClick={() => {
+            setOpenModal(openModal === `email-${_id}` ? null : `email-${_id}`);
+          }}
         >
           <FaUsers />
-          {emails.length !== undefined
-            ? `${emails.length} people`
-            : "No count available"}
+          {emails.length !== undefined ? `${emails.length} people` : "No count available"}
         </div>
       )}
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+
+      {/* Booking Status Modal */}
+      {openModal === `status-${_id}` && (
+        <div
+          className="modal-overlay"
+          onClick={() => setOpenModal(null)}
+          style={{ top: `${getModalPosition(statusButtonRef).top}px`, right: "5%" }}
+        >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <BookingStatusCard
-              onStatusChange={handleStatusChange}
-              emails={emails}
-            />
+            <BookingStatusCard onStatusChange={handleStatusChange} emails={emails} />
           </div>
         </div>
       )}
 
-      {/* Email Modal */}
-      {isEmailModalOpen && (
+      {/* Email Participants Modal */}
+      {openModal === `email-${_id}` && (
         <div
           className="modal-overlay"
-          onClick={() => setIsEmailModalOpen(false)}
+          onClick={() => setOpenModal(null)}
+          style={{ top: `${getModalPosition(peopleButtonRef).top}px`, right: "5%" }}
         >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <Participant emails={emails} />
