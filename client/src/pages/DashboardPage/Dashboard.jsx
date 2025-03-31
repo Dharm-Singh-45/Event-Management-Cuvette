@@ -5,7 +5,7 @@ import Logo from "../../assets/logo.png";
 import Aside from "../../components/Dashboard/Aside";
 import Events from "../../assets/event.png";
 import Booking from "../../assets/booking.png";
-import Availablity from "../../assets/availablity.png";
+import Time from "../../assets/time.png";
 import Settings from "../../assets/setting.png";
 import Create from "../../assets/create.png";
 import Avatar from "../../assets/Avatar.png";
@@ -18,7 +18,7 @@ import { useGetBookingsQuery } from "../../redux/bookingApi";
 const asideItems = [
   { img: Events, title: "Events", path: "/dashboard/events" },
   { img: Booking, title: "Booking", path: "/dashboard/booking" },
-  { img: Availablity, title: "Availablity", path: "/dashboard/availability" },
+  { img: Time, title: "Availablity", path: "/dashboard/availability" },
   { img: Settings, title: "Settings", path: "/dashboard/settings" },
 ];
 

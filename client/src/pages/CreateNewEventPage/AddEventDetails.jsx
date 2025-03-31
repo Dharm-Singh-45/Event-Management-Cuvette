@@ -151,6 +151,7 @@ const AddEventDetails = ({ eventData, onBack }) => {
       <div className="form-group">
         <label>Add link *</label>
         <input
+        className="add-link"
           type="text"
           name="eventLink"
           value={eventDetails.eventLink}

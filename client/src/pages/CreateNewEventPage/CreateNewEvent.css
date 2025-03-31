@@ -1,145 +1,218 @@
 .create-event-container {
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    margin-left: 30px;
-    margin-top: 10px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  margin-left: 30px;
+  margin-top: 10px;
 }
 
 .create-events-heading > h2 {
-    font-size: 24px;
-    font-weight: 600;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 .create-event-container .create-events-heading > span {
-    font-size: 14px;
-    font-weight: normal;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 .create-event-container .create-container {
-    width: 95%;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 15px;
+  width: 95%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
 }
 
 .create-event-container .add-event {
-    text-align: center;
-    color: #1877F2;
-    font-size: 32px;
-    font-weight: 500;
+  text-align: center;
+  color: #1877f2;
+  font-size: 32px;
+  font-weight: 500;
 }
 
 .create-event-container hr {
-    border: 0;
-    height: 1.5px;
-    background: #B6B6B6;
-    margin: 15px 0px;
+  border: 0;
+  height: 1.5px;
+  background: #b6b6b6;
+  margin: 15px 0px;
 }
 
 .create-event-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 80%;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .create-event-container .form-group {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .create-event-container label {
-    font-size: 19px;
-    font-weight: 500;
-    width: 30%;
-    color: #343434;
+  font-size: 19px;
+  font-weight: 500;
+  width: 30%;
+  color: #343434;
 }
 
-.create-event-container input, textarea, select {
-    width: 65%;
-    padding: 8px;
-    border: 1px solid #E0E0E0;
-    border-radius: 16px;
-    height: 40px;
+.create-event-container input,
+textarea,
+select {
+  width: 65%;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  height: 40px;
 }
 
 .create-event-container textarea {
-    height: 75px;
-    resize: none;
+  height: 75px;
+  resize: none;
 }
 
 .create-event-container .buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .create-event-container button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
 }
 
 .create-event-container .cancel {
-    background-color: #F3F3F1;
-    color: black;
+  background-color: #f3f3f1;
+  color: black;
 }
 
 .create-event-container .next {
-    background-color: #1877F2;
-    color: white;
+  background-color: #1877f2;
+  color: white;
 }
 
 .create-event-container .datetime-container {
-    display: flex;
-    gap: 10px;
-    width: 65%;
+  display: flex;
+  gap: 10px;
+  width: 65%;
 }
 
 .create-event-container .datetime-container input,
 .create-event-container .datetime-container select {
-    flex: 1;
+  flex: 1;
 }
 
 .create-event-container .divider-secondary {
-    border: 0;
-    height: 1.5px;
-    opacity: 0.7;
-    margin: 0 !important;
-    padding: 0 !important;
+  border: 0;
+  height: 1.5px;
+  opacity: 0.7;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .create-event-container .set-duration-group {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    color: #343434;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #343434;
 }
 
 .create-event-container .duration-container {
-    display: flex;
-    align-items: center;
-margin-right: auto;
-margin-left: 18px;
-    gap: 5px;
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  margin-left: 18px;
+  gap: 5px;
 }
 
 .create-event-container .duration-container .small-input {
-    width: 40px;
-    text-align: center;
-    padding: 5px;
-    border: 1px solid #E0E0E0;
-    border-radius: 8px;
+  width: 40px;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
 }
 
 .create-event-container .duration-container span {
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 18px;
+  font-weight: bold;
 }
+
+@media (max-width: 500px) {
+    .create-event-container {
+      width: 100%;
+      height: 100%;
+
+    }
+  
+    .create-events-heading {
+      display: none;
+    }
+  
+    .create-event-container .create-container {
+      margin-top: 70px;
+
+      width: 100%;
+      background-color: white;
+      padding: 0;
+      margin-left: -25px;
+
+      
+    }
+    .create-event-container .create-container .add-event{
+        text-align: left;
+        margin-left: 40px;
+        margin-bottom: 10px;
+    }
+    .create-event-container .create-container > hr {
+        display: none;
+    }
+  
+    /* Make form-group stack items in a column */
+    .create-event-container .form-group {
+      flex-direction: column;
+      align-items: flex-start; 
+      width: 100%;
+    }
+  
+   
+    .create-event-container label {
+      width: 100%;
+      text-align: left;
+      font-size: 16px; 
+    }
+  
+   
+    .create-event-container input,
+    .create-event-container textarea,
+    .create-event-container select  {
+      width: 100%;
+      border-radius: 8px;
+    }
+  
+    /* Adjust buttons layout */
+    .create-event-container .buttons {
+      flex-direction: row;
+      align-items: center;
+     width: 80%;
+      gap: 8px;
+    }
+    .create-event-container .buttons > button{
+    width: 150px;
+    }
+    .create-event-container select {
+        width: 100%;
+        min-width: 50%; 
+        appearance: none; 
+      }
+  }
+  
+

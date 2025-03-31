@@ -1,51 +1,71 @@
-.events-container{
-    width: 100%;
-    height: 100vh;
-    margin-left: 30px;
-    margin-top: 10px;
-    overflow-y: auto;
+.events-container {
+  width: 100%;
+  height: 100vh;
+  margin-left: 30px;
+  margin-top: 10px;
+  overflow-y: auto;
 }
 .events-container .events-heading {
-    position: sticky;
-    
+  position: sticky;
 }
-.events-container .events-heading > h2{
-  
-    font-size: 24px;
-    font-weight: 600;
-    line-height: auto;
+.events-container .events-heading > h2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: auto;
 }
-.events-container .events-heading > span{
- 
-    font-size: 14px;
-    font-weight: normal;
-    line-height: auto;
+.events-container .events-heading > span {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: auto;
 }
 
 .events-container .eventCard-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); 
-    margin-top: 20px;
-    width: 100%; 
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  margin-top: 20px;
+  width: 100%;
 }
 
-.events-container  .events-heading .event-container-btn {
-    
-    margin: 0 auto;
-    width: fit-content;
-    height: 30px;
-    padding: 15px;
+.events-container .events-heading .event-container-btn {
+  margin: 0 auto;
+  width: fit-content;
+  height: 30px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 19px;
+  background-color: white;
+  color: #1877f2;
+  border: 1px solid #1877f2;
+  font-size: 16px;
+  font-weight: normal;
+  gap: 10px;
+  position: absolute;
+  right: 40px;
+  top: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  .events-container {
+    width: 100%;
+    height: 100vh;
+
+  }
+  .events-container .events-heading > h2{
+    margin-top: 90px;
+}
+  .events-container .events-heading div > span{
+    color: #545454;
+}
+.events-container .events-heading div .event-container-btn{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 19px;
-    background-color: white;
-    color: #1877F2;
-    border: 1px solid #1877F2;
-    font-size: 16px;
-    font-weight: normal;
-    gap: 10px;
-    position: absolute;
-    right: 40px ;
-    top: 10px;
+    gap: 5px;
+    padding: 0;
+    width: 140px;
+    margin-top: -15px;
+}
+
+
+
 }

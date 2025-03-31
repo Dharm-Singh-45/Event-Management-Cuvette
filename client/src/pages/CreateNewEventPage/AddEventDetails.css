@@ -1,6 +1,5 @@
 .banner-container {
   margin-left: 30px;
-
 }
 .banner-section .banner {
   position: relative;
@@ -134,30 +133,93 @@
 }
 
 .email-tag-remove {
-  width: 20px; /* Set a fixed width */
-  height: 20px; /* Set a fixed height */
-  font-size: 14px; /* Reduce font size */
-  padding: 2px; /* Reduce padding */
-  background-color: #8a8a8a; /* Keep your existing background */
-  border: none; /* Remove border */
-  cursor: pointer; /* Make it clickable */
-  display: flex; /* Center the text */
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  padding: 2px;
+  background-color: #8a8a8a;
+  border: none;
+  cursor: pointer;
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%; /* Make it circular */
-  color: white; /* Adjust text color */
+  border-radius: 50%;
+  color: white;
 }
-.email-tags{
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 5px;
+.email-tags {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
   width: fit-content;
 }
-.email-tag{
+.email-tag {
   background-color: #f3f3f1;
-  display: flex; 
+  display: flex;
   align-items: center;
-   justify-content: center;
-   gap: 10px;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  .banner-container {
+    width: 96%;
+    padding: 10px; 
+    box-sizing: border-box;
+    
+  }
+
+  .banner-container .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 8px; /* Add some vertical spacing */
+  }
+
+  .banner-container .form-group label {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .banner-container .email-input-container {
+    width: 100%;
+  }
+
+  .banner-container .email-tags {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%; /* Changed from 500px to 100% */
+    gap: 5px;
+  }
+
+  
+  .banner-container .form-group input {
+    max-width: 90%; 
+    box-sizing: border-box; 
+
+  }
+
+  /* Specific targeting for the add-link input */
+  .banner-container .form-group .add-link {
+    width: 100%;
+  }
+
+  .banner-container .buttons {
+   
+    align-items: center;
+    width: 80%;
+    gap: 8px;
+    margin: 0 auto;
+  }
+
+  .banner-container .buttons .back, 
+  .banner-container .buttons .save {
+    width: 100%;
+    margin-top: 0; 
+  }
+  .banner-container .divider {
+    width: 90%;
+  } 
 }

@@ -11,7 +11,7 @@
     overflow: hidden;
 }
 
-.eventCard-top {
+.eventCard-container .eventCard-top {
     background-color: #676767;
     width: 100%;
     height: 16px;
@@ -19,7 +19,7 @@
     border-top-left-radius: 16px;
 }
 
-.eventCard-content {
+.eventCard-container .eventCard-content {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -29,14 +29,14 @@
 }
 
 /* Meeting title and edit icon */
-.eventCard-header {
+.eventCard-container .eventCard-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
 }
 
-.eventCard-header h3 {
+.eventCard-container .eventCard-header h3 {
     margin: 0;
     margin-top: 15px;
     font-size: 18px;
@@ -44,7 +44,7 @@
     color: #454545;
 }
 
-.edit-icon {
+.eventCard-container .edit-icon {
     margin-top: 15px;
     width: 16px;
     height: 16px;
@@ -54,7 +54,7 @@
 
 /* Event details */
 
-.event-date {
+.eventCard-container .event-date {
     margin-top: 15px;
     font-size: 12px;
     font-weight: 500;
@@ -62,7 +62,7 @@
     display: block;  
 }
 
-.event-time {
+.eventCard-container .event-time {
     margin-top: 5px;
     font-size: 12px;
     font-weight: 500;
@@ -70,7 +70,7 @@
     display: block;
 }
 
-.event-duration {
+.eventCard-container .event-duration {
     margin-top: 5px;
     font-size: 9px;
     font-weight: 400;
@@ -81,7 +81,7 @@
 
 
 /* Action section */
-.eventCard-actions {
+.eventCard-container .eventCard-actions {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -89,7 +89,7 @@
 }
 
 /* Toggle Switch */
-.toggle-switch {
+.eventCard-container .toggle-switch {
     position: relative;
     width: 40px;
     height: 20px;
@@ -97,13 +97,13 @@
     align-items: center;
 }
 
-.toggle-switch input {
+.eventCard-container .toggle-switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.slider {
+.eventCard-container .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -115,7 +115,7 @@
     border-radius: 20px;
 }
 
-.slider::before {
+.eventCard-container .slider::before {
     position: absolute;
     content: "";
     height: 16px;
@@ -127,17 +127,55 @@
     border-radius: 50%;
 }
 
-input:checked + .slider {
+.eventCard-container input:checked + .slider {
     background-color: #1877F2;
 }
 
-input:checked + .slider::before {
+.eventCard-container input:checked + .slider::before {
     transform: translateX(20px);
 }
 
 /* Action Icons */
-.action-icon {
+.eventCard-container .action-icon {
     width: 18px;
     height: 18px;
     cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 500px) {
+    .eventCard-container {
+        width: 90%;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .eventCard-container .eventCard-header h3 {
+        font-size: 22px;
+    }
+    
+    .eventCard-container .event-date,
+    .eventCard-container .event-time,
+    .eventCard-container .event-duration {
+        font-size: 15px;
+    }
+    
+    .eventCard-container .eventCard-actions {
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .eventCard-container .toggle-switch {
+        width: 35px;
+        height: 18px;
+    }
+    
+    .eventCard-container .slider::before {
+        height: 14px;
+        width: 14px;
+    }
+    
+    .eventCard-container input:checked + .slider::before {
+        transform: translateX(16px);
+    }
 }
