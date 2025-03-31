@@ -2,6 +2,7 @@
     width: 100%;
     height: 100vh;
     display: flex;
+    overflow-y: hidden;
     
 }
 .prefrences-container .left{
@@ -9,13 +10,14 @@
     display: flex;
     justify-content: center;
     align-self:center;
+  
 }
 .prefrences-container .left .logo{
     height: 32px;
     width: 32px;
     position: absolute;
-    top: 48px;
-    left: 48px;
+    top: 40px;
+    left: 40px;
 }
 .prefrences-container .left .select-prefrence{
     margin-top: 20px;
@@ -80,4 +82,44 @@ margin-bottom: 10px;
     width: 100%;
     height: 100vh;
     object-fit: fit;
+}
+
+
+@media screen and (max-width:500px) {
+  .prefrences-container .right{
+    display: none;
+  }  
+
+  .prefrences-container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  } 
+  .prefrences-container .left {
+    width: 100%;
+   
+}
+.prefrences-container .left .logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.prefrences-container .left .select-prefrence {
+    margin-top: 40px;
+  
+}
+.prefrences-container .left .select-prefrence input {
+    background-color: white;
+    border: 1px solid #F6F7F5;
+    border-radius: 10px;
+}
+.prefrences-container .left .select-prefrence .select-category-div > span {
+    font-size: 17px;
+}
+.prefrences-container .left .select-prefrence .prefrence-button {
+    margin-top: 30px;
+}
+
 }
