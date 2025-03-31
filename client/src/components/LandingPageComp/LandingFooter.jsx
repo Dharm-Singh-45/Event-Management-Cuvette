@@ -39,6 +39,7 @@ const LandingFooter = () => {
             <p>Cookie Notice</p>
             <p>Trust Center</p>
           </div>
+          <button className="signup-btn" onClick={()=>navigate('/signup')}>Sign up free</button>
         </div>
       </div>
 

@@ -225,3 +225,195 @@ margin-top: 60px;
 .container .sections .section6{
     width: 100%;
 }
+
+
+
+/* REsponsive for mobile  */
+
+@media screen and (max-width: 500px) {
+    .container .screen1 img {
+        max-width: 100%; 
+    }
+}
+@media screen and (max-width: 500px) {
+    .container .sections {
+        margin: 0 5%; /* Reduce side margins for small screens */
+    }
+
+    .container .sections .section1 {
+        width: 95%;  /* Ensure it takes 90% of available space */
+        margin: 0 auto; /* Center it */
+    }
+
+    .container .sections .section1 span {
+        display: block;
+        font-size: 25px;
+        font-weight: 600;
+        text-align: center;
+        width: 70%;
+       
+    }
+
+    .container .sections .section1 p {
+        margin-top: 20px;
+        font-size: 17px;
+        font-weight: 400;
+        text-align: center;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+ 
+    .container .sections .section2 {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+    }
+
+    /* Center images properly */
+    .container .sections .section2 .section2-right {
+        order: -1;
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Wrapper for overlapping images */
+    .container .sections .section2 .section2-right .images-wrapper {
+        position: relative;
+        width: 90%;
+        max-width: 350px;
+    }
+
+    /* First image */
+    .container .sections .section2 .section2-right .section2-right-img1 {
+        position: absolute;
+        max-width: 100%;
+        top: 0;
+        left: 20%;
+        transform: translateX(-50%);
+        z-index: 2;
+    }
+
+    /* Second image */
+    .container .sections .section2 .section2-right .section2-right-img2 {
+        position: absolute;
+        max-width: 100%;
+        top: 15px;
+        left: 60%;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
+    /* Fix Left Section (Text) */
+    .container .sections .section2 .section2-left {
+        order: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Ensure text is centered */
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        margin: 0; 
+      
+    }
+
+    .container .sections .section2 .section2-left p {
+        font-size: 22px;
+        font-weight: bold;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .container .sections .section2 .section2-left .section2-left-list {
+        font-size: 18px;
+        width: 100%;
+    }
+    .container .sections .section2 .section2-left .section2-left-list span {
+        margin-left: -200px;
+        display: inline-block;
+    }
+
+    .container .sections .section2 .section2-left .section2-left-list ul {
+        padding: 0; /* Remove default padding */
+        list-style-position: inside; /* Keep bullets aligned */
+    }
+
+    .container .sections .section2 .section2-left .section2-left-list ul li {
+        font-size: 16px;
+        margin-top: 15px;
+        text-align: left; /* Align text properly inside */
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .container .sections .section3 {
+        flex-direction: column;  /* Stack elements vertically */
+        height: auto;  /* Adjust height dynamically */
+        align-items: center; /* Center content */
+        text-align: center; /* Center text */
+  
+    }
+
+    .container .sections .section3 .section3-left {
+     
+        width: 100%; /* Take up most of the screen */
+    }
+
+    .container .sections .section3 .section3-left span {
+        font-size: 44px; 
+        line-height: 44px;
+    }
+
+    .container .sections .section3 .section3-left button {
+        font-size: 14px; 
+        margin:  auto;
+        margin-top: 15px;
+
+    }
+
+    .container .sections .section3 .section3-right {
+        display: none; /* Hide the right-side section */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container .sections .section4 {
+        height: auto; /* Let height adjust dynamically */
+        margin-top: 40px; /* Reduce top margin */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container .sections .section4 .section4-top,
+    .container .sections .section4 .section4-bottom {
+        flex-direction: column; /* Stack cards vertically */
+        gap: 15px; /* Add spacing between cards */
+        align-items: center; /* Center align cards */
+    }
+
+    .container .sections .section4 .section4-top .testimonial-card,
+    .container .sections .section4 .section4-bottom .testimonial-card {
+        width: 90%; /* Make cards take most of the screen width */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container .sections .section5 h1 {
+        font-size: 40px; /* Reduce heading size */
+        margin-top: 20px;
+    }
+
+    .container .sections .section5 .apps-grid {
+        grid-template-columns: 1fr; /* Display one column per row */
+       width: 90%;
+    }
+}
