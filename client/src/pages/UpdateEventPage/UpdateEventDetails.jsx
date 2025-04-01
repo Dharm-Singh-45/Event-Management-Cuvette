@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUpdateEventMutation, useGetEventsQuery } from "../../redux/eventApi.js";
 import "../CreateNewEventPage/AddEventDetails.css";
 import Avatar from "../../assets/Avatar.png";
-import EditIcon from "../../assets/editicon.png";
+import EditIcon from "../../assets/EditPencil.png";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
