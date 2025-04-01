@@ -88,7 +88,7 @@ const AddEventDetails = ({ eventData, onBack }) => {
       navigate("/dashboard/events");
     } catch (error) {
       console.error("Error creating event:", error);
-      toast.error("Failed to create event!");
+      toast.error(error?.data.message);
     }
   };
 

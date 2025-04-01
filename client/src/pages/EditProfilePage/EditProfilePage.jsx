@@ -33,6 +33,13 @@ const EditProfilePage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    localStorage.removeItem("selectedCategory");
+    navigate("/login"); 
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -44,7 +51,7 @@ const EditProfilePage = () => {
     try {
       const response = await updateProfile(formData).unwrap();
       toast.success(response.message);
-      navigate("/login");
+      handleLogout()
     } catch (error) {
       console.error("Profile update failed", error);
       toast.error(error?.data.message)

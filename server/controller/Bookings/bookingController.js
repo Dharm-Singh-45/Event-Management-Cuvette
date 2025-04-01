@@ -43,7 +43,7 @@ export const getBookingController = async (req, res) => {
               email: creator.email,
               firstName: creator.firstName || "",
               lastName: creator.lastName || "",
-              status: "accepted", // Set creator's status as "accepted"
+              status: "host", // Indicate that this is the creator of the event
             });
           }
         }
@@ -58,7 +58,6 @@ export const getBookingController = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
 
 
 export const updateBookingStatus = async (req, res) => {

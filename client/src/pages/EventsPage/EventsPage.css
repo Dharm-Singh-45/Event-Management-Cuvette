@@ -61,22 +61,19 @@
     width: 100%;
     height: 100vh;
     padding-bottom: 70px;
-
+    margin-left: 20px;
   }
-  .events-container .events-heading > h2{
+  .events-container .events-heading > h2 {
     margin-top: 90px;
-}
-  .events-container .events-heading div > span{
+  }
+  .events-container .events-heading div > span {
     color: #545454;
-}
-.events-container .events-heading div .event-container-btn{
+  }
+  .events-container .events-heading div .event-container-btn {
     display: flex;
     gap: 5px;
     padding: 0;
     width: 140px;
     margin-top: -15px;
-}
-
-
-
+  }
 }

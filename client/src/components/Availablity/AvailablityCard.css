@@ -115,8 +115,22 @@
     margin-bottom: auto;
   
 }
+.availability-card .save-btn{
+  background-color: #1877f2;
+  width: 90px;
+  height: 30px;
+  border-radius: 20px;
+  padding: 15px;
+  color: white;
+  margin: 10px auto;
+}
+.availability-card .save-btn:hover {
+  background-color: #4c90ea;
+
+ }
 
 @media screen and (max-width:500px) {
+ 
   .availability-card .header {
     margin-bottom: 2px;
   }

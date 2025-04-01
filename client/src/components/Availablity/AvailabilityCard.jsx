@@ -21,7 +21,7 @@ const AvailablityCard = () => {
       slots: [{ start: "", end: "" }],
     }))
   );
-  const [isEditing, setIsEditing] = useState(false);
+  const [localChanges, setLocalChanges] = useState(false);
 
   const { data: userDetails } = useGetUserDetailsQuery();
   const [deleteUnavailableSlot] = useDeleteUnavailableSlotMutation();
@@ -36,10 +36,8 @@ const AvailablityCard = () => {
     skip: !userId,
   });
 
-  const [saveUnavailableSlots] = useSaveUnavailableSlotsMutation();
-  const [lastSavedHash, setLastSavedHash] = useState("");
-
-  const getDataHash = (data) => JSON.stringify(data).replace(/[^a-zA-Z0-9]/g, "");
+  const [saveUnavailableSlots, { isLoading: isSaving }] =
+    useSaveUnavailableSlotsMutation();
 
   const calculateDefaultEndTime = (startTime) => {
     if (!startTime) return "";
@@ -54,13 +52,14 @@ const AvailablityCard = () => {
 
   const checkTimeConflict = (daySlots, currentSlotIndex, newStart, newEnd) => {
     if (!newStart || !newEnd) return false;
-    
+
     return daySlots.some((existingSlot, i) => {
-      if (i === currentSlotIndex || !existingSlot.start || !existingSlot.end) return false;
-      
+      if (i === currentSlotIndex || !existingSlot.start || !existingSlot.end)
+        return false;
+
       const existingStart = existingSlot.start;
       const existingEnd = existingSlot.end;
-      
+
       return (
         (newStart >= existingStart && newStart < existingEnd) ||
         (newEnd > existingStart && newEnd <= existingEnd) ||
@@ -72,43 +71,40 @@ const AvailablityCard = () => {
   const handleCheck = (index) => {
     const updatedAvailability = [...availability];
     const isChecked = !updatedAvailability[index].checked;
-  
+
     updatedAvailability[index].checked = isChecked;
-  
+
     if (!isChecked) {
-      // Mark as unavailable (full day)
       updatedAvailability[index].slots = [{ start: "00:00", end: "23:59" }];
     } else {
-      // Mark as available (reset to empty slots)
       updatedAvailability[index].slots = [{ start: "", end: "" }];
     }
-  
+
     setAvailability(updatedAvailability);
-    triggerSave(updatedAvailability);
+    setLocalChanges(true);
   };
-  
 
   const handleStartTimeChange = (index, slotIndex, value) => {
     const updatedAvailability = [...availability];
     const slot = updatedAvailability[index].slots[slotIndex];
-    
+
     slot.start = value || "";
-    setIsEditing(true);
     setAvailability(updatedAvailability);
+    setLocalChanges(true);
   };
 
   const handleEndTimeFocus = (index, slotIndex) => {
     const updatedAvailability = [...availability];
     const slot = updatedAvailability[index].slots[slotIndex];
-    
+
     if (slot.start && !slot.end) {
       const defaultEnd = calculateDefaultEndTime(slot.start);
       const daySlots = updatedAvailability[index].slots;
-      
+
       if (!checkTimeConflict(daySlots, slotIndex, slot.start, defaultEnd)) {
         slot.end = defaultEnd;
-        setIsEditing(true);
         setAvailability(updatedAvailability);
+        setLocalChanges(true);
       }
     }
   };
@@ -129,70 +125,121 @@ const AvailablityCard = () => {
     }
 
     slot.end = value || "";
-    setIsEditing(true);
     setAvailability(updatedAvailability);
+    setLocalChanges(true);
   };
 
-  const handleTimeBlur = (index, slotIndex) => {
-    if (!isEditing) return;
-    
-    const updatedAvailability = [...availability];
-    const slot = updatedAvailability[index].slots[slotIndex];
-    const daySlots = updatedAvailability[index].slots;
-    
-    if (slot.start && slot.end) {
-      const conflict = checkTimeConflict(daySlots, slotIndex, slot.start, slot.end);
-      
-      if (conflict) {
-        toast.error("This time slot conflicts with an existing one. The slot has been reset.");
-        // Reset the conflicted slot
-        updatedAvailability[index].slots[slotIndex] = { start: "", end: "" };
-        setAvailability(updatedAvailability);
-        setIsEditing(false);
-        return;
+  const validateBeforeSave = () => {
+    let isValid = true;
+
+    availability.forEach((day, dayIndex) => {
+      if (day.checked) {
+        day.slots.forEach((slot, slotIndex) => {
+          if (slot.start && !slot.end) {
+            toast.error(`Please set end time for ${day.day}`);
+            isValid = false;
+          }
+          if (!slot.start && slot.end) {
+            toast.error(`Please set start time for ${day.day}`);
+            isValid = false;
+          }
+          if (slot.start && slot.end && slot.end <= slot.start) {
+            toast.error(`End time must be after start time for ${day.day}`);
+            isValid = false;
+          }
+
+          // Check conflicts
+          if (slot.start && slot.end) {
+            const conflict = checkTimeConflict(
+              day.slots,
+              slotIndex,
+              slot.start,
+              slot.end
+            );
+            if (conflict) {
+              toast.error(`Time conflict detected for ${day.day}`);
+              isValid = false;
+            }
+          }
+        });
       }
-      
-      triggerSave(updatedAvailability);
+    });
+
+    return isValid;
+  };
+
+  const handleSave = async () => {
+    if (!validateBeforeSave()) {
+      return;
     }
-    
-    setIsEditing(false);
+
+    try {
+      const saveData = availability.map((day) => ({
+        userId,
+        day: day.day,
+        slots: day.checked
+          ? day.slots
+              .filter((slot) => slot.start && slot.end)
+              .map((slot) => ({
+                startTime: slot.start,
+                endTime: slot.end,
+              }))
+          : [{ startTime: "00:00", endTime: "23:59" }],
+      }));
+
+      await saveUnavailableSlots({ unavailableSlots: saveData }).unwrap();
+      toast.success("Availability saved successfully!");
+      setLocalChanges(false);
+      // Instead of window.location.reload(), use refetch to get updated data
+      await refetch();
+    } catch (error) {
+      toast.error("Failed to save availability");
+      console.error("Save error:", error);
+    }
   };
 
   const addSlot = (index) => {
     const updatedAvailability = [...availability];
-    const lastSlot = updatedAvailability[index].slots[updatedAvailability[index].slots.length - 1];
+    const lastSlot =
+      updatedAvailability[index].slots[
+        updatedAvailability[index].slots.length - 1
+      ];
 
     if (!lastSlot.start || !lastSlot.end) {
-      toast.error("Please complete the current time slot before adding new one");
+      toast.error(
+        "Please complete the current time slot before adding new one"
+      );
       return;
     }
     updatedAvailability[index].slots.push({ start: "", end: "" });
     setAvailability(updatedAvailability);
+    setLocalChanges(true);
   };
 
   const copySlot = (index) => {
     const updatedAvailability = [...availability];
-    const lastSlot = updatedAvailability[index].slots[updatedAvailability[index].slots.length - 1];
-    
+    const lastSlot =
+      updatedAvailability[index].slots[
+        updatedAvailability[index].slots.length - 1
+      ];
+
     if (!lastSlot.start || !lastSlot.end) {
       toast.error("Please complete the current time slot before copying");
       return;
     }
-    
+
     updatedAvailability[index].slots.push({ ...lastSlot });
     setAvailability(updatedAvailability);
-    // triggerSave(updatedAvailability);
+    setLocalChanges(true);
   };
 
   const removeSlot = async (index, slotIndex) => {
     const updatedAvailability = [...availability];
     const selectedDay = updatedAvailability[index];
-  
-    // Always allow removing if there are slots (even if it's the last one)
+
     if (selectedDay.slots.length > 0) {
       const slotToDelete = selectedDay.slots[slotIndex];
-  
-      // Only try to delete from backend if the slot has an _id
+
       if (slotToDelete._id) {
         try {
           await deleteUnavailableSlot({
@@ -200,88 +247,63 @@ const AvailablityCard = () => {
             day: selectedDay.day,
             slotId: slotToDelete._id,
           }).unwrap();
-          toast.success("slot deleted successfully.")
+          toast.success("Slot deleted successfully.");
+          await refetch(); // Refresh data after deletion
         } catch (error) {
           console.error("Error deleting slot:", error);
-          toast.error("Error deleting slot")
+          toast.error("Error deleting slot");
           return;
         }
       }
-  
-      // Remove the slot from the UI
+
       selectedDay.slots.splice(slotIndex, 1);
-      
-      // If we removed the last slot, add an empty one
+
       if (selectedDay.slots.length === 0) {
         selectedDay.slots.push({ start: "", end: "" });
       }
-      
-      setAvailability(updatedAvailability);
-      triggerSave(updatedAvailability);
-    }
-  };
 
-  const triggerSave = async (availabilityData) => {
-    if (!userId) {
-      console.error("User ID is missing");
-      return;
-    }
-  
-    const currentData = availabilityData.map((day) => ({
-      userId,
-      day: day.day,
-      slots: day.checked
-        ? day.slots.filter(slot => slot.start && slot.end).length > 0
-          ? day.slots.map(slot => ({
-              startTime: slot.start,
-              endTime: slot.end,
-            }))
-          : [{ startTime: "", endTime: "" }] // Store blank times when no slots are provided
-        : [{ startTime: "00:00", endTime: "23:59" }], // Store full-day unavailability when unchecked
-    }));
-  
-    const currentHash = getDataHash(currentData);
-  
-    if (currentHash !== lastSavedHash) {
-      try {
-        await saveUnavailableSlots({ unavailableSlots: currentData }).unwrap();
-        setLastSavedHash(currentHash);
-        refetch();
-        toast.success("unavailable slot time added")
-      } catch (error) {
-        console.error("Save failed:", error);
-      }
+      setAvailability(updatedAvailability);
+      setLocalChanges(true);
     }
   };
-  
 
   useEffect(() => {
     if (!unavailableSlots?.unavailableSlots) return;
 
-    const unavailableDaysMap = unavailableSlots.unavailableSlots.reduce((acc, slotData) => {
-      const isFullDayUnavailable = slotData.slots.some(
-        (slot) => slot.start === "00:00" && slot.end === "23:59"
-      );
+    const unavailableDaysMap = unavailableSlots.unavailableSlots.reduce(
+      (acc, slotData) => {
+        const isFullDayUnavailable = slotData.slots.some(
+          (slot) => slot.start === "00:00" && slot.end === "23:59"
+        );
 
-      acc[slotData.day] = {
-        checked: !isFullDayUnavailable,
-        slots: isFullDayUnavailable 
-          ? [] 
-          : slotData.slots.map((slot) => ({
-              start: slot.start === "00:00" && slot.end === "23:59" ? "" : slot.start,
-              end: slot.start === "00:00" && slot.end === "23:59" ? "" : slot.end,
-              _id: slot._id
-            })),
-      };
-      return acc;
-    }, {});
+        acc[slotData.day] = {
+          checked: !isFullDayUnavailable,
+          slots: isFullDayUnavailable
+            ? []
+            : slotData.slots.map((slot) => ({
+                start:
+                  slot.start === "00:00" && slot.end === "23:59"
+                    ? ""
+                    : slot.start,
+                end:
+                  slot.start === "00:00" && slot.end === "23:59"
+                    ? ""
+                    : slot.end,
+                _id: slot._id,
+              })),
+        };
+        return acc;
+      },
+      {}
+    );
 
     const updatedAvailability = daysOfWeek.map((day) => ({
       day,
-      checked: unavailableDaysMap[day]?.checked ?? (day !== "Sun"),
-      slots: unavailableDaysMap[day]?.slots?.length > 0 
-        ? unavailableDaysMap[day].slots 
-        : [{ start: "", end: "", _id: null }],
+      checked: unavailableDaysMap[day]?.checked ?? day !== "Sun",
+      slots:
+        unavailableDaysMap[day]?.slots?.length > 0
+          ? unavailableDaysMap[day].slots
+          : [{ start: "", end: "", _id: null }],
     }));
 
     setAvailability(updatedAvailability);
@@ -325,17 +347,23 @@ const AvailablityCard = () => {
                       <input
                         type="time"
                         value={slot.start || ""}
-                        onChange={(e) => handleStartTimeChange(index, slotIndex, e.target.value)}
-                        onBlur={() => handleTimeBlur(index, slotIndex)}
+                        onChange={(e) =>
+                          handleStartTimeChange(
+                            index,
+                            slotIndex,
+                            e.target.value
+                          )
+                        }
                         required
                       />
                       <input
                         type="time"
                         value={slot.end || ""}
-                        onChange={(e) => handleEndTimeChange(index, slotIndex, e.target.value)}
+                        onChange={(e) =>
+                          handleEndTimeChange(index, slotIndex, e.target.value)
+                        }
                         onFocus={() => handleEndTimeFocus(index, slotIndex)}
-                        onBlur={() => handleTimeBlur(index, slotIndex)}
-                         max="23:59"
+                        max="23:59"
                         required
                       />
                       <button onClick={() => removeSlot(index, slotIndex)}>
@@ -360,6 +388,13 @@ const AvailablityCard = () => {
           </div>
         ))}
       </div>
+      <button
+        className="save-btn"
+        onClick={handleSave}
+        disabled={!localChanges || isSaving}
+      >
+        {isSaving ? "Saving..." : "Save"}
+      </button>
     </div>
   );
 };

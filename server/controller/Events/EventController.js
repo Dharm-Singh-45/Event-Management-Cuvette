@@ -2,6 +2,7 @@ import EventModel from "../../model/EventSchema.js";
 
 import moment from "moment"; // Install moment.js if not already installed
 import UnavailableModel from "../../model/UnavailableSchema.js";
+import UserModel from "../../model/userSchema.js";
 
 export const createEvent = async (req, res) => {
   try {
@@ -20,12 +21,24 @@ export const createEvent = async (req, res) => {
       emails,
     } = req.body;
 
-    console.log("req.body", req.body);
-
     if (!eventTopic || !hostName || !date || !time || !meetingTitle) {
       return res.status(400).json({
         success: false,
         message: "All required fields must be provided",
+      });
+    }
+
+    // ✅ Check if all emails exist in UserModel
+    const emailList = Array.isArray(emails)
+      ? emails
+      : emails.split(",").map((e) => e.trim());
+
+    const registeredUsers = await UserModel.find({ email: { $in: emailList } });
+
+    if (registeredUsers.length !== emailList.length) {
+      return res.status(400).json({
+        success: false,
+        message: "Some participants are not registered users.",
       });
     }
 
@@ -81,7 +94,6 @@ export const createEvent = async (req, res) => {
       date: date, // Same date
     });
 
-    console.log("existingmeeting", existingMeetings);
     // Check for overlapping meetings
     const isConflict = existingMeetings.some((event) => {
       const existingStart = moment(
@@ -197,7 +209,7 @@ export const updateEvent = async (req, res) => {
       .add(parseInt(durationHours), "hours")
       .add(parseInt(durationMinutes), "minutes");
 
-      // 1️⃣ Fetch unavailable slots for the user on the given date
+    // 1️⃣ Fetch unavailable slots for the user on the given date
     const unavailableSlots = await UnavailableModel.findOne({
       userId: req.user._id,
       date: date,
@@ -216,20 +228,29 @@ export const updateEvent = async (req, res) => {
         }
 
         // Check for specific unavailable slots
-        const unavailableStart = moment(`${date} ${slot.start}`, "YYYY-MM-DD HH:mm");
-        const unavailableEnd = moment(`${date} ${slot.end}`, "YYYY-MM-DD HH:mm");
+        const unavailableStart = moment(
+          `${date} ${slot.start}`,
+          "YYYY-MM-DD HH:mm"
+        );
+        const unavailableEnd = moment(
+          `${date} ${slot.end}`,
+          "YYYY-MM-DD HH:mm"
+        );
 
-        return startDateTime.isBefore(unavailableEnd) && endDateTime.isAfter(unavailableStart);
+        return (
+          startDateTime.isBefore(unavailableEnd) &&
+          endDateTime.isAfter(unavailableStart)
+        );
       });
 
       if (isUnavailable) {
         return res.status(400).json({
           success: false,
-          message: "You have an unavailable time slot that conflicts with this meeting.",
+          message:
+            "You have an unavailable time slot that conflicts with this meeting.",
         });
       }
     }
-
 
     // Find existing meetings (excluding the current event)
     const existingMeetings = await EventModel.find({

@@ -56,9 +56,10 @@
     .booking-container {
       width: 100%;
       height: 100%;
+      margin-left: 15px;
     }
     .booking-container .booking-heading {
-       margin-top: 90px;
+       margin-top: 70px;
     }
     .booking-container .booking-details-container{
       width: 90%;
