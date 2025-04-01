@@ -20,8 +20,13 @@ const BookingPage = () => {
   const [updateBookingStatus] = useUpdateBookingStatusMutation();
   const userEmail = userData?.email; 
  
-
-  if (isLoading) return <p>Loading bookings...</p>;
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <p>Loading bookings...</p>
+      </div>
+    );
+  }
   if (error) return <p>Error fetching bookings.</p>;
 
   // Extract the correct status dynamically

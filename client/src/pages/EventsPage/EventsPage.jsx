@@ -15,7 +15,13 @@ const EventsPage = () => {
     userDetailsRefetch()
   },[])
 
-  if (isLoading) return <p>Loading events...</p>;
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <p>Loading events...</p>
+      </div>
+    );
+  }
   if (error) return <p>Error loading events. Please try again later.</p>;
 
 const openCreatePage = () =>{
