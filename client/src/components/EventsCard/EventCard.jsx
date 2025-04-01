@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./EventCard.css";
-import EditIcon from "../../assets/EditIcon.png";
+import EditIcon from "../../assets/EditPencil.png";
 import CopyIcon from "../../assets/copy.png";
 import DeleteIcon from "../../assets/delete.png";
 import { calculateEndTime } from "../../helper/calculateDateAndTime.js";
