@@ -64,7 +64,7 @@ const BookingCard = ({
 
       <div className="booking-details">
         <span className="booking-title">{eventTopic || "No Topic available"}</span>
-        <span className="booking-description">{description || "No description provided"}</span>
+        <span className="booking-description">{`You and ${emails.length-1} other`}</span>
       </div>
 
       {/* Status Button - Opens Modal Only When Active Tab is "Pending" */}

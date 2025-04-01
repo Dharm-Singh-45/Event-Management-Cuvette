@@ -53,7 +53,11 @@ const UpdateEvent = () => {
     setEventData({ ...eventData, [name]: value });
   };
 
+  // Get today's date in YYYY-MM-DD format
+  const todayDate = new Date().toISOString().split("T")[0];
+
   if (isLoading) return <p>Loading event details...</p>;
+
 
   return (
     <div className="create-event-container">
@@ -122,6 +126,7 @@ const UpdateEvent = () => {
                   name="date"
                   value={eventData.date}
                   onChange={handleChange}
+                  min={todayDate}
                 />
                 <input
                   type="time"

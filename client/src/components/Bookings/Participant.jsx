@@ -18,7 +18,7 @@ const Participant = ({emails}) => {
                <li key={index} className="participant">
                  <div className="participant-info">
                    <div className="participant-circle"></div>
-                   <span style={{ color: "#808080" }}>{emailObj.email}</span>
+                   <span style={{ color: "#808080" }}>{`${emailObj?.firstName}${emailObj?.lastName}` || emailObj?.email}</span>
                    <input type="checkbox"
                      checked={emailObj.status === "accepted"} 
                      disabled={emailObj.status === "accepted"} 
