@@ -66,7 +66,7 @@ Check out the deployed application here: [Event Management Platform](https://eve
 
 **Dummy Credentials:**
 - **Email:** admin@mail.com
-- **Password:** Admin@123
+- **Password:** Admin@123-
 
 ## Responsive Design
 - Fully optimized for desktop and mobile devices.
