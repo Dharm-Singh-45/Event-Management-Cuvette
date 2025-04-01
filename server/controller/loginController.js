@@ -9,7 +9,6 @@ export const loginController = async(req,res)=>{
             return res.status(400).json({message:"All fields are required"})
         }
         const user = await UserModel.findOne({email});
-        console.log(user)
         if(!user){
             return res.status(400).json({message:"User does not exist"})
         }
