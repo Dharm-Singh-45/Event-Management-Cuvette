@@ -152,7 +152,7 @@ const CreateNewEvent = () => {
               <button
                 className="cancel"
                 onClick={(e) => {
-                  e.preventDefault(); // Prevent form submission
+                  e.preventDefault(); 
                   navigate("/dashboard/events", { replace: true });
                 }}
               >
