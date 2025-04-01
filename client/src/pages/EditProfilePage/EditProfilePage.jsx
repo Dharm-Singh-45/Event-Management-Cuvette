@@ -47,7 +47,7 @@ const EditProfilePage = () => {
       navigate("/login");
     } catch (error) {
       console.error("Profile update failed", error);
-      toast.error("Profile update failed")
+      toast.error(error?.data.message)
     }
   };
 

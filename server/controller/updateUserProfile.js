@@ -18,6 +18,13 @@ const updateUserProfile = async (req, res) => {
     user.lastName = lastName || user.lastName;
     user.email = email || user.email;
 
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@!,-]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      return res.status(400).json({
+        message:
+          "Password must contain at least one uppercase letter, one number, one special character (@,!,-) and be at least 8 characters long",
+      });
+    }
   
     if (password) {
       const salt = await bcrypt.genSalt(10);
