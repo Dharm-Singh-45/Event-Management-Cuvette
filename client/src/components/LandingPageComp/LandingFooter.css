@@ -78,6 +78,9 @@
   margin-top: 20px;
 }
 
+.links-container .login-btn{
+  display: none;
+}
 /* Acknowledgment */
 .acknowledgment {
   font-size: 12px;
