@@ -14,7 +14,6 @@ const BookingPage = () => {
 
   const { data, error, isLoading, refetch } = useGetBookingsQuery();
 
-  console.log("data...",data)
 
   const { data: userData } = useGetUserDetailsQuery();
   

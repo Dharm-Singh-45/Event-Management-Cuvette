@@ -335,6 +335,7 @@ const AvailablityCard = () => {
                         onChange={(e) => handleEndTimeChange(index, slotIndex, e.target.value)}
                         onFocus={() => handleEndTimeFocus(index, slotIndex)}
                         onBlur={() => handleTimeBlur(index, slotIndex)}
+                         max="23:59"
                         required
                       />
                       <button onClick={() => removeSlot(index, slotIndex)}>

@@ -24,7 +24,7 @@ const CalendarView = () => {
           .toDate();
 
         // Calculate end time
-        const endTimeStr = calculateEndTime(event.time, event.period, event.duration);
+        const endTimeStr = calculateEndTime(event.time, event.durationHours, event.durationMinutes);
         const endTime = moment(event.date)
           .set({
             hour: parseInt(endTimeStr.split(":")[0]) + (endTimeStr.includes("PM") ? 12 : 0),
