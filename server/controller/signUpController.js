@@ -9,6 +9,13 @@ export const signUpController = async(req,res)=>{
         return res.status(400).json({message:"All fields are required"})
     }
 
+       // Password validation (at least 1 capital letter, 1 numeric letter, 1 special character, and min length 8)
+       const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@!,-]).{8,}$/;
+       if (!passwordRegex.test(password)) {
+           return res.status(400).json({
+               message: "Password must contain at least one uppercase letter, one number, one special character (@,!,-) and be at least 8 characters long"
+           });
+       }
     try {
         const existingUser = await UserModel.findOne({email})
         if(existingUser){

@@ -103,8 +103,15 @@ margin-left: 10px;
 
 
 @media screen and (max-width: 500px) {
+    body, html {
+        overflow: hidden; 
+        height: 100%; 
+        margin: 0; 
+      }
     .dashboard-container {
         flex-direction: column;
+        height: 100vh; /* Full height of the viewport */
+    overflow: hidden; /* Disable scrolling here */
         
     }
 
@@ -120,6 +127,7 @@ margin-left: 10px;
         align-items: center;
         justify-content: space-around;
         padding: 10px 0;
+        overflow: hidden;
        
     }
 
@@ -158,8 +166,8 @@ margin-left: 10px;
     .dashboard-container .dashboard-right {
         width: 100%;
         height: calc(100vh - 60px); 
-        overflow-y: auto;
-        overflow-x: hidden;
+        overflow: hidden;
+       
     }
 
     .dashboard-container .logout-dropdown {
@@ -172,6 +180,6 @@ margin-left: 10px;
         padding: 5px;
         border-radius: 22px;
         background: #F3F3F1;
-      z-index: 1000;
+      z-index: 9999999;
     }
 }

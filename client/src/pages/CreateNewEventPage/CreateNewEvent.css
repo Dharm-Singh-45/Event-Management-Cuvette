@@ -150,7 +150,7 @@ select {
     .create-event-container {
       width: 100%;
       height: 100%;
-
+      padding-bottom: 30px;
     }
   
     .create-events-heading {
@@ -207,6 +207,7 @@ select {
     }
     .create-event-container .buttons > button{
     width: 150px;
+    margin-bottom: 10px;
     }
     .create-event-container select {
         width: 100%;

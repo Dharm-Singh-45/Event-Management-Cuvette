@@ -50,6 +50,7 @@
   .events-container {
     width: 100%;
     height: 100vh;
+    padding-bottom: 70px;
 
   }
   .events-container .events-heading > h2{

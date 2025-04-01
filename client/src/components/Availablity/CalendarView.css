@@ -2,6 +2,7 @@
     width: 90%;
     margin: 20px;
     font-family: Arial, sans-serif;
+    
   }
   
   .calendar-title {
@@ -26,7 +27,7 @@
   }
   
   .rbc-today {
-    background-color: #f0f8ff !important; /* Light Blue Background for Today */
+    background-color: #f0f8ff !important; 
   }
   
   .rbc-toolbar button {
@@ -41,4 +42,55 @@
   .rbc-toolbar button:hover {
     background-color: #0056b3;
   }
+  
+  @media screen and (max-width: 500px) {
+    .rbc-toolbar {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between; 
+      align-items: center;
+      flex-direction: row; 
+      gap: 5px;
+    }
+  
+    .rbc-btn-group {
+      display: flex;
+      flex-direction: row; 
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap; 
+      gap: 1px;
+    }
+  
+    .rbc-toolbar-label {
+      font-size: 12px;
+      white-space: nowrap; 
+      text-align: center;
+      flex-grow: 1; 
+    }
+  
+    .rbc-toolbar button {
+      font-size: 12px;
+      padding: 5px 8px;
+    }
+    .custom-calendar {
+      height: calc(100vh - 120px); /* Adjusted height */
+      overflow-y: auto; /* Enables scrolling */
+      padding-bottom: 30px; /* Adds extra space at the bottom */
+    }
+  
+    .rbc-time-view {
+      overflow-y: auto;
+      max-height: calc(100vh - 150px);
+      padding-bottom: 30px; /* Extra space for scrolling */
+    }
+  
+    .rbc-time-content {
+      overflow-y: auto;
+      height: auto;
+      max-height: calc(100vh - 150px);
+      padding-bottom: 30px; /* Ensures extra space below */
+    }
+  }
+  
   

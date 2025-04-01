@@ -83,3 +83,66 @@
     color: #6d6d6d;
   }
   
+  @media screen and (max-width:500px) {
+    .booking-card {
+      padding: 5px;
+      border-radius: 8px;
+      margin-top: 10px;
+     
+    }
+    .booking-card .booking-date-time {
+      gap: 3px;
+    }
+    .booking-card .booking-date {
+      font-size: 12px;
+      color: #000000;
+    }
+    
+    .booking-card .booking-time {
+      font-size: 12px;
+      color: #1877F2;
+    }
+    .booking-card .booking-details {
+     
+      margin-left: 15px;
+    }
+    
+    .booking-card .booking-title {
+     font-size: 12px;
+      color: #454545;
+    }
+    
+    .booking-card .booking-description {
+      font-size: 10px;
+      color: #6D6D6D;
+    }
+    .booking-card  .accepted {
+      background-color: #00C35F;
+      color: #ffffff;
+    width:70px;
+      border-radius: 13px;
+      border: none;
+    }
+    .booking-card .pending {
+      background-color: #fef9c3;
+      color: #92400e;
+      width:70px;
+      border-radius: 13px;
+      padding: 5px;
+    }
+    
+    .booking-card .cancelled {
+      background-color: #616161;
+      color: #ffffff;
+      width:70px;
+      border-radius: 13px;
+      padding: 5px;
+    }
+    .booking-card .people-count {
+     
+      gap: 3px;
+      font-size: 10px;
+      color: #6d6d6d;
+    }
+
+  }

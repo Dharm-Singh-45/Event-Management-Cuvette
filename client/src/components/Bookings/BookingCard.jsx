@@ -12,6 +12,7 @@ const BookingCard = ({
   date,
   time,
   meetingTitle,
+  eventTopic,
   description,
   status,
   emails,
@@ -62,7 +63,7 @@ const BookingCard = ({
       </div>
 
       <div className="booking-details">
-        <span className="booking-title">{meetingTitle || "No title available"}</span>
+        <span className="booking-title">{eventTopic || "No Topic available"}</span>
         <span className="booking-description">{description || "No description provided"}</span>
       </div>
 

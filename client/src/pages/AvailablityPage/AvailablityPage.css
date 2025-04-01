@@ -19,13 +19,12 @@
 
 /* View Buttons Container */
 .availablity-container .view-buttons {
-  display: inline-flex; /* Shrink to content width */
-  gap: 10px; /* Space between buttons */
+  display: inline-flex; 
+  gap: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
   background-color: #e8e8e8;
-  padding: 5px 10px; /* Adds spacing inside */
-  border-radius: 8px; /* Optional: Rounds edges for a clean look */
+  padding: 5px 10px; 
 }
 
 /* Buttons Styling */
@@ -41,6 +40,7 @@
   background-color: #e8e8e8;
   color: #676767;
   transition: all 0.3s ease;
+  border: none;
 }
 
 /* Active Button Styling */
@@ -55,4 +55,36 @@
   width: 18px;
   height: 18px;
   object-fit: contain;
+}
+
+@media screen and (max-width:500px) {
+  .availablity-container {
+    width: 100%;
+    height: 100vh;
+    margin-left: 10px;
+    margin-top: 10px;
+    overflow-y: hidden;
+  }
+  .availablity-container .availablity-heading{
+    margin-top: 70px;
+  }
+  .availablity-container .view-buttons{
+   height: 35px;
+    gap: 5px; 
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background-color: #e8e8e8;
+    border-radius: 8px; /* Optional: Rounds edges for a clean look */
+
+  }
+  .availablity-container .view-buttons button{
+    font-size: 10px;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: #e8e8e8;
+    color: #676767;
+    transition: all 0.3s ease;
+    border: none;
+  }
 }
