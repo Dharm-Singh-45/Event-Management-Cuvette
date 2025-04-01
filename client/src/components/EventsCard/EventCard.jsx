@@ -62,7 +62,7 @@ const EventCard = ({ event, refreshEvents }) => {
     if (event.eventLink) {
       navigator.clipboard
         .writeText(event.eventLink)
-        .then(() => alert("Event link copied to clipboard!"))
+        .then(() => toast.success("Event link copied to clipboard!"))
         .catch((err) => console.error("Failed to copy: ", err));
     } else {
       toast.error("No event link available to copy.")
