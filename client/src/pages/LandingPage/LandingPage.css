@@ -231,6 +231,21 @@ margin-top: 60px;
 /* REsponsive for mobile  */
 
 @media screen and (max-width: 500px) {
+    .container{
+        overflow-y: auto !important;
+        max-height: 101vh;  
+
+    }
+
+    .container .top-bar {
+      
+        position: sticky;
+    }
+    .container .top-bar .logo {
+      
+        margin-top: -5px;
+    }
+    
     .container .screen1 img {
         max-width: 100%; 
     }
@@ -264,7 +279,7 @@ margin-top: 60px;
 
 
 @media screen and (max-width: 500px) {
- 
+  
     .container .sections .section2 {
         flex-direction: column;
         align-items: center;

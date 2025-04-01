@@ -44,7 +44,7 @@
   height: 40px;
   margin-top: -60px;
 }
-.links-container .signup-btn{
+.links-container .signup-btn {
   display: none;
   background-color: #1877f2;
   color: white;
@@ -99,8 +99,6 @@
   object-fit: contain;
 }
 
-
-
 @media screen and (max-width: 500px) {
   .footer-container {
     padding: 20px;
@@ -108,7 +106,7 @@
 
   .footer-top {
     flex-direction: column;
-    align-items:flex-start ;
+    align-items: flex-start;
     text-align: left;
   }
 
@@ -119,43 +117,45 @@
     align-items: center;
   }
 
-  .login-button , .signup-button {
+  .login-button,
+  .signup-button {
     display: none;
   }
-  
-  
 
   .links-container {
     display: flex;
     flex-direction: column;
     gap: 0px;
     margin-top: 20px;
-    margin-left: 10px; /* Give some left padding */
+    margin-left: 10px; 
   }
   .links-container div {
-    margin-bottom: 0px; /* Add spacing between link groups */
+    margin-bottom: 0px; 
   }
   .links-container div > p {
-    margin: 10px 0; /* Adjust spacing */
+    margin: 10px 0; 
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
-    color: #1E2330;
+    color: #1e2330;
+  }
+.links-container .mobile-view-btn{
+  display: flex;
+  gap: 20px;
+}
+  .links-container .signup-btn,.links-container .login-btn {
+    display: block;
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+    margin-top: 20px;
   }
 
-  .links-container .signup-btn{
-display: block;
-background-color: #1877f2;
-color: white;
-border: none;
-border-radius: 35px;
-font-size: 18px;
-cursor: pointer;
-width: 150px;
-height: 50px;
-margin-top: 20px;
-
-}
 
   .footer-bottom {
     flex-direction: column;
