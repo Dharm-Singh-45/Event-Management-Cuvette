@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignUpUserMutation } from "../../redux/authApi";
+import { useSignUpUserMutation } from "../../redux/authApi.js";
 import "./RegisterPage.css";
 import Logo from "../../assets/logo.png";
 import SideImage from "../../assets/registerPageSideImage.png";

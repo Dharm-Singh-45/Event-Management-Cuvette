@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./CreateNewEvent.css";
-import AddEventDetails from "./AddEventDetails";
+import AddEventDetails from "./AddEventDetails.jsx";
 import { useNavigate } from "react-router-dom";
 
 const CreateNewEvent = () => {

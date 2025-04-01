@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./PrefrencePage.css";
 import Logo from "../../assets/logo.png";
 import SideImage from "../../assets/registerPageSideImage.png";
-import CategoryCard from "../../components/Prefrences/CategoryCard";
+import CategoryCard from "../../components/Prefrences/CategoryCard.jsx";
 import Sales from "../../assets/Sales.png";
 import Education from "../../assets/Education.png";
 import Finance from "../../assets/Finance.png";
@@ -12,7 +12,7 @@ import Recruting from "../../assets/Recruting.png";
 import Tech from "../../assets/Tech.png";
 import Marketing from "../../assets/Marketing.png";
 import { useNavigate } from "react-router-dom";
-import { useGetUserDetailsQuery, useUpdatePreferencesMutation } from "../../redux/userApi";
+import { useGetUserDetailsQuery, useUpdatePreferencesMutation } from "../../redux/userApi.js";
 import { toast } from "react-toastify";
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useUpdateEventMutation, useGetEventsQuery } from "../../redux/eventApi";
+import { useUpdateEventMutation, useGetEventsQuery } from "../../redux/eventApi.js";
 import "../CreateNewEventPage/AddEventDetails.css";
 import Avatar from "../../assets/Avatar.png";
 import EditIcon from "../../assets/editicon.png";

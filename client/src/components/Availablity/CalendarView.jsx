@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import { useGetEventsQuery } from "../../redux/eventApi";
+import { useGetEventsQuery } from "../../redux/eventApi.js";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./CalendarView.css";
-import { calculateEndTime } from "../../helper/calculateDateAndTime";
+import { calculateEndTime } from "../../helper/calculateDateAndTime.js";
 
 const localizer = momentLocalizer(moment);
 

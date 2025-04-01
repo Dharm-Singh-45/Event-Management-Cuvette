@@ -3,8 +3,8 @@ import {
   useSaveUnavailableSlotsMutation,
   useGetUnavailableSlotsQuery,
   useDeleteUnavailableSlotMutation,
-} from "../../redux/eventApi";
-import { useGetUserDetailsQuery } from "../../redux/userApi";
+} from "../../redux/eventApi.js";
+import { useGetUserDetailsQuery } from "../../redux/userApi.js";
 import "./AvailablityCard.css";
 import AddTime from "../../assets/add-time.png";
 import Copy from "../../assets/copy.png";

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import "./EventsPage.css";
-import EventCard from "../../components/EventsCard/EventCard";
+import EventCard from "../../components/EventsCard/EventCard.jsx";
 import Create from "../../assets/create.png";
-import { useGetEventsQuery } from "../../redux/eventApi";
+import { useGetEventsQuery } from "../../redux/eventApi.js";
 import { useNavigate } from "react-router-dom";
-import { useGetUserDetailsQuery } from "../../redux/userApi";
+import { useGetUserDetailsQuery } from "../../redux/userApi.js";
 
 const EventsPage = () => {
   const { data, isLoading, error,refetch } = useGetEventsQuery();

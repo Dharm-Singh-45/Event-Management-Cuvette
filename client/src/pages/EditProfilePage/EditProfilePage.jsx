@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./EditProfilePage.css";
-import { useUpdateProfileMutation, useGetUserDetailsQuery } from "../../redux/userApi";
+import { useUpdateProfileMutation, useGetUserDetailsQuery } from "../../redux/userApi.js";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 

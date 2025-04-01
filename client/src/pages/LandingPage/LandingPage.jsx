@@ -5,8 +5,8 @@ import Screen1 from "../../assets/screen 1.png";
 import Screen2 from "../../assets/Fantastical 1.png";
 import Screen3 from "../../assets/screen 3.png";
 import Star from "../../assets/star.png";
-import TestimonialCard from "../../components/LandingPageComp/TestimonialCard";
-import AppsIntegration from "../../components/LandingPageComp/AppsIntegration";
+import TestimonialCard from "../../components/LandingPageComp/TestimonialCard.jsx";
+import AppsIntegration from "../../components/LandingPageComp/AppsIntegration.jsx";
 import Audiowave from "../../assets/audio.png";
 import Bandsintown from "../../assets/Bandsintown.png";
 import Bonfire from "../../assets/Bonfire.png";
@@ -16,7 +16,7 @@ import ClubHouse from "../../assets/ClubHouse.png";
 import Contact from "../../assets/Contact.png";
 import Community from "../../assets/Community.png";
 import Gift from "../../assets/Gift.png";
-import LandingFooter from "../../components/LandingPageComp/LandingFooter";
+import LandingFooter from "../../components/LandingPageComp/LandingFooter.jsx";
 
 import { useNavigate } from "react-router-dom";
 

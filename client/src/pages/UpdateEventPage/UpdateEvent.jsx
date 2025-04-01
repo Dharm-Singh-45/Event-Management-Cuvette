@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"; 
 import "../CreateNewEventPage/CreateNewEvent.css";
 import { useGetEventByIdQuery } from "../../redux/eventApi";
-import UpdateEventDetails from "./UpdateEventDetails";
+import UpdateEventDetails from "./UpdateEventDetails.jsx";
 
 
 const UpdateEvent = () => {

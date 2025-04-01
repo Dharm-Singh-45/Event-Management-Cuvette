@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./AvailablityPage.css";
 import AvailablityIcon from '../../assets/availablity.png';
 import CalenderIcon from '../../assets/calender.png';
-import CalendarView from "../../components/Availablity/CalendarView";
-import AvailabilityCard from "../../components/Availablity/AvailabilityCard";
+import CalendarView from "../../components/Availablity/CalendarView.jsx";
+import AvailabilityCard from "../../components/Availablity/AvailabilityCard.jsx";
 
 const AvailablityPage = () => {
   const [selectedView, setSelectedView] = useState("availability");

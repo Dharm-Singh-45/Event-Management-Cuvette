@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import "./Dashboard.css";
 import Logo from "../../assets/logo.png";
-import Aside from "../../components/Dashboard/Aside";
+import Aside from "../../components/Dashboard/Aside.jsx";
 import Events from "../../assets/event.png";
 import Booking from "../../assets/booking.png";
 import Time from "../../assets/time.png";
@@ -11,9 +11,9 @@ import Create from "../../assets/create.png";
 import Avatar from "../../assets/Avatar.png";
 import SignOut from "../../assets/logout.png";
 
-import { useGetUserDetailsQuery } from "../../redux/userApi";
-import { useGetEventsQuery, useGetUnavailableSlotsQuery } from "../../redux/eventApi";
-import { useGetBookingsQuery } from "../../redux/bookingApi";
+import { useGetUserDetailsQuery } from "../../redux/userApi.js";
+import { useGetEventsQuery, useGetUnavailableSlotsQuery } from "../../redux/eventApi.js";
+import { useGetBookingsQuery } from "../../redux/bookingApi.js";
 
 const asideItems = [
   { img: Events, title: "Events", path: "/dashboard/events" },

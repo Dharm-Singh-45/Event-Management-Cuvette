@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { FaUsers } from "react-icons/fa";
-import { useUpdateBookingStatusMutation } from "../../redux/bookingApi";
+import { useUpdateBookingStatusMutation } from "../../redux/bookingApi.js";
 import "./BookingCard.css";
-import { calculateEndTime } from "../../helper/calculateDateAndTime";
-import { formatStartTime } from "../../helper/formatSartTime";
-import BookingStatusCard from "./BookingStatusCard";
-import Participant from "./Participant";
+import { calculateEndTime } from "../../helper/calculateDateAndTime.js";
+import { formatStartTime } from "../../helper/formatSartTime.js";
+import BookingStatusCard from "./BookingStatusCard.jsx";
+import Participant from "./Participant.jsx";
 
 const BookingCard = ({
   _id,

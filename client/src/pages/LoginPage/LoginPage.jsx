@@ -3,7 +3,7 @@ import "./LoginPage.css";
 import Logo from '../../assets/logo.png';
 import SideImage from "../../assets/registerPageSideImage.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginUserMutation } from "../../redux/authApi";
+import { useLoginUserMutation } from "../../redux/authApi.js";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {

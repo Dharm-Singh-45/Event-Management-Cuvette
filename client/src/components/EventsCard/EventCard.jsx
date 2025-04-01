@@ -3,9 +3,9 @@ import "./EventCard.css";
 import EditIcon from "../../assets/EditIcon.png";
 import CopyIcon from "../../assets/copy.png";
 import DeleteIcon from "../../assets/delete.png";
-import { calculateEndTime } from "../../helper/calculateDateAndTime";
-import { useDeleteEventMutation, useToggleEventStatusMutation } from "../../redux/eventApi";
-import { formatStartTime } from "../../helper/formatSartTime";
+import { calculateEndTime } from "../../helper/calculateDateAndTime.js";
+import { useDeleteEventMutation, useToggleEventStatusMutation } from "../../redux/eventApi.js";
+import { formatStartTime } from "../../helper/formatSartTime.js";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 

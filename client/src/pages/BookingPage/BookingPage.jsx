@@ -2,11 +2,11 @@ import React, {useState } from "react";
 import {
   useGetBookingsQuery,
   useUpdateBookingStatusMutation,
-} from "../../redux/bookingApi";
-import BookingCard from "../../components/Bookings/BookingCard";
+} from "../../redux/bookingApi.js";
+import BookingCard from "../../components/Bookings/BookingCard.jsx";
 import "./BookingPage.css";
 import { toast } from "react-toastify";
-import { useGetUserDetailsQuery } from "../../redux/userApi";
+import { useGetUserDetailsQuery } from "../../redux/userApi.js";
 
 const BookingPage = () => {
   const [activeTab, setActiveTab] = useState("Upcoming");
