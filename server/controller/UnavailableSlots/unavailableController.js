@@ -47,7 +47,7 @@ export const saveUnavailableSlots = async (req, res) => {
     // Process each slot individually with its correct date
     const processedSlots = unavailableSlots.flatMap(slotData => {
       return slotData.slots.map(slot => {
-        const slotDate = getSlotDate(slotData.day, slot.startTime); // Calculate correct date for each slot
+        const slotDate = getSlotDate(slotData.day, slot.startTime); 
         
         return {
           day: slotData.day,
@@ -76,7 +76,7 @@ export const saveUnavailableSlots = async (req, res) => {
 
     const bulkOperations = finalSlots.map(({ day, date, slots }) => ({
       updateOne: {
-        filter: { userId, day, date }, // Include date in the filter to handle same day on different dates
+        filter: { userId, day, date },
         update: { $set: { userId, day, date, slots } },
         upsert: true,
       },

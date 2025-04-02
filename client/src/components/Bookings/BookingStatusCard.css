@@ -1,7 +1,7 @@
 /* Modal Background */
 .modal-overlay {
     position: fixed;
-    /* top: 30%; */
+  
     right: 5%;
     width: 400px;
     height: auto;
@@ -13,7 +13,7 @@
     padding: 20px;
     border-radius: 8px;
     width: 100%;
-    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); */
+   
 }
 
 /* Header Section - Participants Count & Action Buttons */
@@ -47,8 +47,8 @@
     display: flex;
     align-items: center;
     padding: 8px 0;
-    border-bottom: none; /* Removed the border */
-    justify-content: space-between; /* Moves checkbox to the right */
+    border-bottom: none;
+    justify-content: space-between; 
 }
 
 /* Ensure the participant info and checkbox are aligned properly */
@@ -56,11 +56,11 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    flex-grow: 1; /* Allows content to take full width */
+    flex-grow: 1; 
 }
 
 .participant input {
-    margin-left: auto; /* Pushes the checkbox to the right */
+    margin-left: auto;
 }
 
 
@@ -68,7 +68,7 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background-color: #ddd; /* Light gray background */
+    background-color: #ddd; 
     display: inline-block;
 }
 

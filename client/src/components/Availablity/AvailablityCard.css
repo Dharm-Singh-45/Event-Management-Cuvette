@@ -28,7 +28,7 @@
   }
 
   .availability-card .day-header input[type="checkbox"] {
-    accent-color: #1877F2; /* Changes checkbox checkmark color */
+    accent-color: #1877F2; 
     margin-right: 20px;
     cursor: pointer;
 }

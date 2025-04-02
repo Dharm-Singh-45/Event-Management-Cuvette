@@ -28,12 +28,12 @@ const CreateNewEvent = () => {
     let { name, value } = e.target;
 
     // Convert value to number and check limits
-    value = value.replace(/\D/g, ""); // Remove non-numeric characters
+    value = value.replace(/\D/g, ""); 
     if (name === "durationHours") {
       if (parseInt(value) > 24) value = "24";
     }
     if (name === "durationMinutes") {
-      if (parseInt(value) >= 60) value = "59"; // Prevent minutes > 59
+      if (parseInt(value) >= 60) value = "59";
     }
 
     setEventData({ ...eventData, [name]: value });

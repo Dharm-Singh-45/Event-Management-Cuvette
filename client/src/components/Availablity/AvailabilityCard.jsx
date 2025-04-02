@@ -190,7 +190,7 @@ const AvailablityCard = () => {
       await saveUnavailableSlots({ unavailableSlots: saveData }).unwrap();
       toast.success("Availability saved successfully!");
       setLocalChanges(false);
-      // Instead of window.location.reload(), use refetch to get updated data
+     
       await refetch();
     } catch (error) {
       toast.error("Failed to save availability");
@@ -248,7 +248,7 @@ const AvailablityCard = () => {
             slotId: slotToDelete._id,
           }).unwrap();
           toast.success("Slot deleted successfully.");
-          await refetch(); // Refresh data after deletion
+          await refetch(); 
         } catch (error) {
           console.error("Error deleting slot:", error);
           toast.error("Error deleting slot");

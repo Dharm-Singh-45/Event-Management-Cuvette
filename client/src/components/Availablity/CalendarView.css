@@ -74,22 +74,22 @@
       padding: 5px 8px;
     }
     .custom-calendar {
-      height: calc(100vh - 120px); /* Adjusted height */
-      overflow-y: auto; /* Enables scrolling */
-      padding-bottom: 30px; /* Adds extra space at the bottom */
+      height: calc(100vh - 120px); 
+      overflow-y: auto;
+      padding-bottom: 30px; 
     }
   
     .rbc-time-view {
       overflow-y: auto;
       max-height: calc(100vh - 150px);
-      padding-bottom: 30px; /* Extra space for scrolling */
+      padding-bottom: 30px; 
     }
   
     .rbc-time-content {
       overflow-y: auto;
       height: auto;
       max-height: calc(100vh - 150px);
-      padding-bottom: 30px; /* Ensures extra space below */
+      padding-bottom: 30px; 
     }
   }
   

@@ -43,7 +43,7 @@ export const getBookingController = async (req, res) => {
               email: creator.email,
               firstName: creator.firstName || "",
               lastName: creator.lastName || "",
-              status: "host", // Indicate that this is the creator of the event
+              status: "host", 
             });
           }
         }
@@ -63,7 +63,7 @@ export const getBookingController = async (req, res) => {
 export const updateBookingStatus = async (req, res) => {
   try {
     const { eventId, status } = req.body;
-    const userEmail = req.user.email; // Get logged-in user's email from authentication
+    const userEmail = req.user.email;
 
     // Validate the status
     if (!["pending", "accepted", "cancelled"].includes(status.toLowerCase())) {

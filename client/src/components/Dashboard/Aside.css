@@ -14,7 +14,7 @@
     height: 26px;
     margin-left: 20px;
     object-fit: contain;
-    filter: grayscale(100%); /* Default: Gray */
+    filter: grayscale(100%);
     transition: filter 0.3s ease;
 }
 .aside-container.active {
@@ -41,7 +41,7 @@
      
     }
     .aside-container.active {
-        background-color: transparent; /* Remove active background */
+        background-color: transparent; 
     }
 
     .aside-container img {

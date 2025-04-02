@@ -81,11 +81,11 @@ const BookingPage = () => {
         {filteredBookings.length > 0 ? (
           filteredBookings
             .filter((event) => {
-              const eventDate = new Date(event.date); // Convert ISO string to Date object
-              const [hours, minutes] = event.time.split(":").map(Number); // Extract hours and minutes
+              const eventDate = new Date(event.date); 
+              const [hours, minutes] = event.time.split(":").map(Number);
               const eventDateTime = new Date(
                 eventDate.setHours(hours, minutes, 0, 0)
-              ); // Set hours & minutes
+              ); 
 
               const currentDateTime = new Date();
               if (activeTab === "Upcoming")

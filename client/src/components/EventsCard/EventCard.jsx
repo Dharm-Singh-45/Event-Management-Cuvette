@@ -21,15 +21,15 @@ const EventCard = ({ event, refreshEvents }) => {
   };
 
   useEffect(() => {
-    setIsToggled(event.enabled); // Ensure initial state is set
+    setIsToggled(event.enabled); 
   }, [event.enabled]);
 
   const handleToggle = async () => {
     try {
       const response = await toggleEventStatus(event._id);
       if (response?.data?.success) {
-        setIsToggled(response.data.enabled); // Update UI based on response
-        refreshEvents(); // Refresh event list
+        setIsToggled(response.data.enabled); 
+        refreshEvents(); 
       } else {
         toast.error("Failed to update event status.")
         

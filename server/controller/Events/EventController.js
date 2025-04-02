@@ -58,7 +58,7 @@ export const createEvent = async (req, res) => {
     if (unavailableSlots) {
       const isUnavailable = unavailableSlots.slots.some((slot) => {
         if (slot.start === "00:00" && slot.end === "23:59") {
-          return true; // Entire day blocked
+          return true; 
         }
         if (!slot.start || !slot.end) {
           return false;
