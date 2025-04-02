@@ -62,7 +62,7 @@ CreateNewEvent is a React-based event scheduling and management interface that a
 5. Submit the event to finalize its creation.
 
 ## Live Demo
-Check out the deployed application here: [Event Management Platform](https://event-management-cuvette-frontendd.vercel.app/)
+Check out the deployed application here: https://event-management-cuvette-frontendd.vercel.app/
 
 **Dummy Credentials:**
 - **Email:** admin@mail.com
